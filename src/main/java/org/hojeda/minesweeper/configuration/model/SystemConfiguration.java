@@ -6,7 +6,6 @@ public class SystemConfiguration {
 
     private Integer httpPort;
     private String basePath;
-    private String address;
     private Integer maxThreads;
     private Integer minThreads;
     private Integer timeout;
@@ -25,14 +24,6 @@ public class SystemConfiguration {
 
     public void setBasePath(String basePath) {
         this.basePath = basePath;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Integer getMaxThreads() {
@@ -66,7 +57,6 @@ public class SystemConfiguration {
         SystemConfiguration that = (SystemConfiguration) o;
         return Objects.equals(httpPort, that.httpPort) &&
             Objects.equals(basePath, that.basePath) &&
-            Objects.equals(address, that.address) &&
             Objects.equals(maxThreads, that.maxThreads) &&
             Objects.equals(minThreads, that.minThreads) &&
             Objects.equals(timeout, that.timeout);
@@ -74,6 +64,6 @@ public class SystemConfiguration {
 
     @Override
     public int hashCode() {
-        return Objects.hash(httpPort, basePath, address, maxThreads, minThreads, timeout);
+        return Objects.hash(httpPort, basePath, maxThreads, minThreads, timeout);
     }
 }

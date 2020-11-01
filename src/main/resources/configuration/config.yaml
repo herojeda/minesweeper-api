@@ -1,6 +1,6 @@
 system:
   http_port: "8080"
-  base_path: "/minesweeper/api"
+  base_path: "/"
   min_threads: 10
   max_threads: 100
   timeout: 10000

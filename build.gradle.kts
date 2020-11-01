@@ -2,8 +2,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm") version "1.3.72"
+    id("com.github.johnrengelman.shadow") version "5.0.0"
     idea
     java
+    application
 }
 
 val group = "org.hojeda"
@@ -45,6 +47,9 @@ dependencies {
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:$jacksonVersion")
     implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
 
+    // Utils
+    implementation("org.apache.commons:commons-lang3:3.1")
+
     // Test dependencies
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
@@ -53,6 +58,7 @@ dependencies {
 
 }
 
+// Test config
 tasks.withType<Test> {
     useJUnitPlatform()
     testLogging {
@@ -86,4 +92,20 @@ tasks.withType<Test> {
             }
         }
     })
+}
+
+// Application
+val mainClass: String = "org.hojeda.minesweeper.configuration.MainApplication"
+
+application {
+    this.mainClassName = mainClass
+}
+
+tasks.shadowJar {
+    archiveBaseName.set("minesweeper")
+    archiveClassifier.set("shadow")
+    mergeServiceFiles()
+    manifest {
+        attributes(mapOf("Main-Class" to mainClass))
+    }
 }
