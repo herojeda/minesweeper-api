@@ -1,4 +1,4 @@
-package org.hojeda.minesweeper.util;
+package org.hojeda.minesweeper.util.base;
 
 import org.hojeda.minesweeper.configuration.MainApplication;
 import org.junit.jupiter.api.AfterEach;

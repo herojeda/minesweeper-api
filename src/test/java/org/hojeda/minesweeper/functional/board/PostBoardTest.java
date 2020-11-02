@@ -3,7 +3,7 @@ package org.hojeda.minesweeper.functional.board;
 import kong.unirest.Unirest;
 import org.apache.http.HttpStatus;
 import org.hojeda.minesweeper.entrypoint.router.Routes;
-import org.hojeda.minesweeper.util.FunctionalTest;
+import org.hojeda.minesweeper.util.base.FunctionalTest;
 import org.hojeda.minesweeper.util.JsonLoader;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +30,8 @@ public class PostBoardTest extends FunctionalTest {
         var response = Unirest.post(givenUri)
             .body(givenBody)
             .asString();
+
+        System.out.println(response.getBody());
 
         // Validate status, should be 201
         assertThat(response.getStatus(), is(HttpStatus.SC_CREATED));

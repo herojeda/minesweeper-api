@@ -4,6 +4,7 @@ import org.hojeda.minesweeper.core.entity.board.field.BoardFieldCreationData;
 import org.hojeda.minesweeper.core.entity.constants.board.BoardStatus;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class BoardCreationData {
     private Integer bombs;
     private BoardStatus status;
     private LocalDate createdAt;
-    private Set<BoardFieldCreationData> fields;
+    private List<BoardFieldCreationData> fields;
 
     private BoardCreationData(Builder builder) {
         setRowSize(builder.rowSize);
@@ -80,11 +81,11 @@ public class BoardCreationData {
         this.createdAt = createdAt;
     }
 
-    public Set<BoardFieldCreationData> getFields() {
+    public List<BoardFieldCreationData> getFields() {
         return fields;
     }
 
-    public void setFields(Set<BoardFieldCreationData> fields) {
+    public void setFields(List<BoardFieldCreationData> fields) {
         this.fields = fields;
     }
 
@@ -124,7 +125,7 @@ public class BoardCreationData {
         private Integer bombs;
         private BoardStatus status;
         private LocalDate createdAt;
-        private Set<BoardFieldCreationData> fields;
+        private List<BoardFieldCreationData> fields;
 
         private Builder() {
         }
@@ -154,7 +155,7 @@ public class BoardCreationData {
             return this;
         }
 
-        public Builder withFields(Set<BoardFieldCreationData> val) {
+        public Builder withFields(List<BoardFieldCreationData> val) {
             fields = val;
             return this;
         }
