@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.is;
 public class HealthCheckTest extends FunctionalTest {
 
     @Test
-    public void when_call_healt_check_should_return_200() {
+    public void when_call_health_check_should_return_200() {
 
         final var givenUri = baseUrl + Routes.HEALTH;
 

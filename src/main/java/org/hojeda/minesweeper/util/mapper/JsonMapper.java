@@ -1,4 +1,4 @@
-package org.hojeda.minesweeper.util;
+package org.hojeda.minesweeper.util.mapper;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;

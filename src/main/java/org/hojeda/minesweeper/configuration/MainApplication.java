@@ -3,6 +3,7 @@ package org.hojeda.minesweeper.configuration;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.entrypoint.router.base.HealthCheckRouter;
+import org.hojeda.minesweeper.entrypoint.router.board.BoardRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -27,6 +28,7 @@ public class MainApplication implements SparkApplication, RouteGroup {
     @Override
     public void addRoutes() {
         Context.getInjector().getInstance(HealthCheckRouter.class).addRoutes();
+        Context.getInjector().getInstance(BoardRouter.class).addRoutes();
     }
 
     @Override
