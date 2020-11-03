@@ -1,8 +1,6 @@
 package org.hojeda.minesweeper.entrypoint.router.dto.response.board;
 
-import org.hojeda.minesweeper.core.entity.constants.board.BoardStatus;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,16 +9,19 @@ public class PostBoardResponse {
     private Long id;
     private Integer rowSize;
     private Integer columnSize;
-    private Integer bombs;
+    private Integer mines;
     private String status;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private Set<PostBoardFieldResponse> fields;
+
+    public PostBoardResponse() {
+    }
 
     private PostBoardResponse(Builder builder) {
         setId(builder.id);
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
-        setBombs(builder.bombs);
+        setMines(builder.mines);
         setStatus(builder.status);
         setCreatedAt(builder.createdAt);
         setFields(builder.fields);
@@ -35,7 +36,7 @@ public class PostBoardResponse {
         builder.id = copy.getId();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
-        builder.bombs = copy.getBombs();
+        builder.mines = copy.getMines();
         builder.status = copy.getStatus();
         builder.createdAt = copy.getCreatedAt();
         builder.fields = copy.getFields();
@@ -66,12 +67,12 @@ public class PostBoardResponse {
         this.columnSize = columnSize;
     }
 
-    public Integer getBombs() {
-        return bombs;
+    public Integer getMines() {
+        return mines;
     }
 
-    public void setBombs(Integer bombs) {
-        this.bombs = bombs;
+    public void setMines(Integer mines) {
+        this.mines = mines;
     }
 
     public String getStatus() {
@@ -82,11 +83,11 @@ public class PostBoardResponse {
         this.status = status;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -106,7 +107,7 @@ public class PostBoardResponse {
         return id.equals(that.id) &&
             rowSize.equals(that.rowSize) &&
             columnSize.equals(that.columnSize) &&
-            bombs.equals(that.bombs) &&
+            mines.equals(that.mines) &&
             status == that.status &&
             createdAt.equals(that.createdAt);
     }
@@ -122,7 +123,7 @@ public class PostBoardResponse {
             "id=" + id +
             ", rowSize=" + rowSize +
             ", columnSize=" + columnSize +
-            ", bombs=" + bombs +
+            ", mines=" + mines +
             ", status=" + status +
             ", createdAt=" + createdAt +
             ", fields=" + fields +
@@ -133,9 +134,9 @@ public class PostBoardResponse {
         private Long id;
         private Integer rowSize;
         private Integer columnSize;
-        private Integer bombs;
+        private Integer mines;
         private String status;
-        private LocalDate createdAt;
+        private LocalDateTime createdAt;
         private Set<PostBoardFieldResponse> fields;
 
         private Builder() {
@@ -156,8 +157,8 @@ public class PostBoardResponse {
             return this;
         }
 
-        public Builder withBombs(Integer val) {
-            bombs = val;
+        public Builder withMines(Integer val) {
+            mines = val;
             return this;
         }
 
@@ -166,7 +167,7 @@ public class PostBoardResponse {
             return this;
         }
 
-        public Builder withCreatedAt(LocalDate val) {
+        public Builder withCreatedAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }

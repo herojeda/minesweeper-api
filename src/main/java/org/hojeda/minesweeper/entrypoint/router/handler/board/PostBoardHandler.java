@@ -31,7 +31,7 @@ public class PostBoardHandler implements Route {
         var postBoardRequest = JsonMapper.get().readValue(request.body(), PostBoardRequest.class);
         var board = createBoard.execute(
             BasicBoardData.newBuilder()
-                .withBombs(postBoardRequest.getBombs())
+                .withMines(postBoardRequest.getMines())
                 .withColumnSize(postBoardRequest.getColumnSize())
                 .withRowSize(postBoardRequest.getRowSize())
                 .build()
@@ -40,7 +40,7 @@ public class PostBoardHandler implements Route {
         response.status(HttpStatus.CREATED_201);
         response.header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.content());
         return PostBoardResponse.newBuilder()
-            .withBombs(board.getBombs())
+            .withMines(board.getMines())
             .withColumnSize(board.getColumnSize())
             .withCreatedAt(board.getCreatedAt())
             .withStatus(board.getStatus().name().toLowerCase())

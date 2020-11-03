@@ -34,6 +34,12 @@ dependencies {
         exclude(group = "org.slf4j", module = "slf4j-api")
     }
 
+    // Database
+    implementation("org.flywaydb:flyway-core:6.1.3")
+    implementation("com.zaxxer:HikariCP:3.4.1")
+    implementation("com.h2database:h2:1.4.197")
+    implementation("commons-dbutils:commons-dbutils:1.7")
+
     // IoC
     implementation("com.google.inject:guice:$guiceVersion")
 

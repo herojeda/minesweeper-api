@@ -1,6 +1,7 @@
 package org.hojeda.minesweeper.configuration;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.flywaydb.core.Flyway;
 import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.entrypoint.router.base.HealthCheckRouter;
 import org.hojeda.minesweeper.entrypoint.router.board.BoardRouter;
@@ -37,12 +38,13 @@ public class MainApplication implements SparkApplication, RouteGroup {
         try {
             LOGGER.info("BOOT_INIT: Waiting for initialization...");
             Context.init();
+            LOGGER.info("Flyway applied migrations: " + Context.getInjector().getInstance(Flyway.class).migrate());
             var systemConfig = Context.getInjector().getInstance(SystemConfiguration.class);
             configureServer(systemConfig);
             setUpRoutes(systemConfig);
             Spark.awaitInitialization();
             LOGGER.info("BOOT_READY");
-        } catch (UnknownHostException e) {
+        } catch (Exception e) {
             LOGGER.error("BOOT_ERROR: " + e.getMessage(), e);
             throw new RuntimeException(e);
         } finally {

@@ -6,12 +6,12 @@ public class BasicBoardData {
 
     private Integer rowSize;
     private Integer columnSize;
-    private Integer bombs;
+    private Integer mines;
 
     private BasicBoardData(Builder builder) {
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
-        setBombs(builder.bombs);
+        setMines(builder.mines);
     }
 
     public static Builder newBuilder() {
@@ -22,7 +22,7 @@ public class BasicBoardData {
         Builder builder = new Builder();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
-        builder.bombs = copy.getBombs();
+        builder.mines = copy.getMines();
         return builder;
     }
 
@@ -42,12 +42,12 @@ public class BasicBoardData {
         this.columnSize = columnSize;
     }
 
-    public Integer getBombs() {
-        return bombs;
+    public Integer getMines() {
+        return mines;
     }
 
-    public void setBombs(Integer bombs) {
-        this.bombs = bombs;
+    public void setMines(Integer mines) {
+        this.mines = mines;
     }
 
     @Override
@@ -57,12 +57,12 @@ public class BasicBoardData {
         BasicBoardData that = (BasicBoardData) o;
         return rowSize.equals(that.rowSize) &&
             columnSize.equals(that.columnSize) &&
-            bombs.equals(that.bombs);
+            mines.equals(that.mines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rowSize, columnSize, bombs);
+        return Objects.hash(rowSize, columnSize, mines);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class BasicBoardData {
         return "BasicBoardData{" +
             "rowSize=" + rowSize +
             ", columnSize=" + columnSize +
-            ", bombs=" + bombs +
+            ", mines=" + mines +
             '}';
     }
 
@@ -78,7 +78,7 @@ public class BasicBoardData {
     public static final class Builder {
         private Integer rowSize;
         private Integer columnSize;
-        private Integer bombs;
+        private Integer mines;
 
         private Builder() {
         }
@@ -93,8 +93,8 @@ public class BasicBoardData {
             return this;
         }
 
-        public Builder withBombs(Integer val) {
-            bombs = val;
+        public Builder withMines(Integer val) {
+            mines = val;
             return this;
         }
 

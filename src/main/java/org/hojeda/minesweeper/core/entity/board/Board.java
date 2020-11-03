@@ -3,25 +3,28 @@ package org.hojeda.minesweeper.core.entity.board;
 import org.hojeda.minesweeper.core.entity.board.field.BoardField;
 import org.hojeda.minesweeper.core.entity.constants.board.BoardStatus;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
+import java.util.UUID;
 
 public class Board {
 
     private Long id;
+    private UUID uuid;
     private Integer rowSize;
     private Integer columnSize;
-    private Integer bombs;
+    private Integer mines;
     private BoardStatus status;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private Set<BoardField> fields;
 
     private Board(Builder builder) {
         setId(builder.id);
+        setUuid(builder.uuid);
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
-        setBombs(builder.bombs);
+        setMines(builder.mines);
         setStatus(builder.status);
         setCreatedAt(builder.createdAt);
         setFields(builder.fields);
@@ -34,13 +37,56 @@ public class Board {
     public static Builder newBuilder(Board copy) {
         Builder builder = new Builder();
         builder.id = copy.getId();
+        builder.uuid = copy.getUuid();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
-        builder.bombs = copy.getBombs();
+        builder.mines = copy.getMines();
         builder.status = copy.getStatus();
         builder.createdAt = copy.getCreatedAt();
         builder.fields = copy.getFields();
         return builder;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Board)) return false;
+        Board board = (Board) o;
+        return id.equals(board.id) &&
+            uuid.equals(board.uuid) &&
+            rowSize.equals(board.rowSize) &&
+            columnSize.equals(board.columnSize) &&
+            mines.equals(board.mines) &&
+            status == board.status &&
+            createdAt.equals(board.createdAt) &&
+            Objects.equals(fields, board.fields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Board{" +
+            "id=" + id +
+            ", uuid=" + uuid +
+            ", rowSize=" + rowSize +
+            ", columnSize=" + columnSize +
+            ", miness=" + mines +
+            ", status=" + status +
+            ", createdAt=" + createdAt +
+            ", fields=" + fields +
+            '}';
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public Long getId() {
@@ -67,12 +113,12 @@ public class Board {
         this.columnSize = columnSize;
     }
 
-    public Integer getBombs() {
-        return bombs;
+    public Integer getMines() {
+        return mines;
     }
 
-    public void setBombs(Integer bombs) {
-        this.bombs = bombs;
+    public void setMines(Integer mines) {
+        this.mines = mines;
     }
 
     public BoardStatus getStatus() {
@@ -83,11 +129,11 @@ public class Board {
         this.status = status;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -99,45 +145,15 @@ public class Board {
         this.fields = fields;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Board)) return false;
-        Board board = (Board) o;
-        return id.equals(board.id) &&
-            rowSize.equals(board.rowSize) &&
-            columnSize.equals(board.columnSize) &&
-            bombs.equals(board.bombs) &&
-            status == board.status &&
-            createdAt.equals(board.createdAt);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "Board{" +
-            "id=" + id +
-            ", rowSize=" + rowSize +
-            ", columnSize=" + columnSize +
-            ", bombs=" + bombs +
-            ", status=" + status +
-            ", createdAt=" + createdAt +
-            ", fields=" + fields +
-            '}';
-    }
-
 
     public static final class Builder {
         private Long id;
+        private UUID uuid;
         private Integer rowSize;
         private Integer columnSize;
-        private Integer bombs;
+        private Integer mines;
         private BoardStatus status;
-        private LocalDate createdAt;
+        private LocalDateTime createdAt;
         private Set<BoardField> fields;
 
         private Builder() {
@@ -145,6 +161,11 @@ public class Board {
 
         public Builder withId(Long val) {
             id = val;
+            return this;
+        }
+
+        public Builder withUuid(UUID val) {
+            uuid = val;
             return this;
         }
 
@@ -158,8 +179,8 @@ public class Board {
             return this;
         }
 
-        public Builder withBombs(Integer val) {
-            bombs = val;
+        public Builder withMines(Integer val) {
+            mines = val;
             return this;
         }
 
@@ -168,7 +189,7 @@ public class Board {
             return this;
         }
 
-        public Builder withCreatedAt(LocalDate val) {
+        public Builder withCreatedAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }

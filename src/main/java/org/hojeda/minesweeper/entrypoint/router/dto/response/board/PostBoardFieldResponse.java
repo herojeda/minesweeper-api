@@ -10,6 +10,9 @@ public class PostBoardFieldResponse {
     private Integer value;
     private Boolean hidden;
 
+    public PostBoardFieldResponse() {
+    }
+
     private PostBoardFieldResponse(Builder builder) {
         setId(builder.id);
         setRowNumber(builder.rowNumber);

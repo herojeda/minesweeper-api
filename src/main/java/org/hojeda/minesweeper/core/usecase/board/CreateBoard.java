@@ -4,20 +4,21 @@ import org.hojeda.minesweeper.core.entity.board.BasicBoardData;
 import org.hojeda.minesweeper.core.entity.board.Board;
 import org.hojeda.minesweeper.core.entity.board.BoardCreationData;
 import org.hojeda.minesweeper.core.entity.constants.board.BoardStatus;
-import org.hojeda.minesweeper.core.repository.board.SaveBoardRepository;
+import org.hojeda.minesweeper.core.repository.board.SaveCompleteBoardRepository;
 import org.hojeda.minesweeper.core.usecase.board.field.GetDataToCreateBoardFields;
 
 import javax.inject.Inject;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 public class CreateBoard {
 
     private GetDataToCreateBoardFields getDataToCreateBoardFields;
-    private SaveBoardRepository saveBoardRepository;
+    private SaveCompleteBoardRepository saveBoardRepository;
 
     @Inject
-    public CreateBoard(GetDataToCreateBoardFields getDataToCreateBoardFields, SaveBoardRepository saveBoardRepository) {
+    public CreateBoard(GetDataToCreateBoardFields getDataToCreateBoardFields, SaveCompleteBoardRepository saveBoardRepository) {
         this.getDataToCreateBoardFields = getDataToCreateBoardFields;
         this.saveBoardRepository = saveBoardRepository;
     }
@@ -25,10 +26,11 @@ public class CreateBoard {
     public Board execute(BasicBoardData basicBoardData) {
 
         var creationData = BoardCreationData.newBuilder()
-            .withBombs(basicBoardData.getBombs())
+            .withUuid(UUID.randomUUID())
+            .withMines(basicBoardData.getMines())
             .withColumnSize(basicBoardData.getColumnSize())
             .withRowSize(basicBoardData.getRowSize())
-            .withCreatedAt(LocalDate.now())
+            .withCreatedAt(LocalDateTime.now())
             .withStatus(BoardStatus.CREATED)
             .withFields(List.copyOf(getDataToCreateBoardFields.execute(basicBoardData)))
             .build();

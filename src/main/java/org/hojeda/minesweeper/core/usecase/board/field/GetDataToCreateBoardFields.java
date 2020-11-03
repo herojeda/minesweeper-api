@@ -8,17 +8,16 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class GetDataToCreateBoardFields {
 
-    private GenerateBombFields generateBombFields;
-    private PutMineIntoFieldsTemplate putBombIntoFieldsTemplate;
+    private GenerateMineFields generatemineFields;
+    private PutMineIntoFieldsTemplate putMineIntoFieldsTemplate;
 
     @Inject
-    public GetDataToCreateBoardFields(GenerateBombFields generateBombFields, PutMineIntoFieldsTemplate putBombIntoFieldsTemplate) {
-        this.generateBombFields = generateBombFields;
-        this.putBombIntoFieldsTemplate = putBombIntoFieldsTemplate;
+    public GetDataToCreateBoardFields(GenerateMineFields generatemineFields, PutMineIntoFieldsTemplate putMineIntoFieldsTemplate) {
+        this.generatemineFields = generatemineFields;
+        this.putMineIntoFieldsTemplate = putMineIntoFieldsTemplate;
     }
 
     public Set<BoardFieldCreationData> execute(BasicBoardData basicBoardData) {
@@ -31,14 +30,8 @@ public class GetDataToCreateBoardFields {
                     .collect(Collectors.toMap(columnIdx -> columnIdx, column -> 0))
             ));
 
-        Stream.generate(() -> Stream.generate(() -> 0)
-            .limit(basicBoardData.getColumnSize())
-            .collect(Collectors.toList()))
-            .limit(basicBoardData.getRowSize())
-            .collect(Collectors.toList());
-
-        generateBombFields.execute(basicBoardData).stream()
-            .forEach((bomb) -> putBombIntoFieldsTemplate.execute(bomb, fieldsTemplate));
+        generatemineFields.execute(basicBoardData).stream()
+            .forEach((mine) -> putMineIntoFieldsTemplate.execute(mine, fieldsTemplate));
 
         return fieldsTemplate.entrySet().stream()
             .flatMap(row -> row.getValue().entrySet().stream()

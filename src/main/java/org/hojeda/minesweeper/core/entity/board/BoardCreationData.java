@@ -3,24 +3,26 @@ package org.hojeda.minesweeper.core.entity.board;
 import org.hojeda.minesweeper.core.entity.board.field.BoardFieldCreationData;
 import org.hojeda.minesweeper.core.entity.constants.board.BoardStatus;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
+import java.util.UUID;
 
 public class BoardCreationData {
 
+    private UUID uuid;
     private Integer rowSize;
     private Integer columnSize;
-    private Integer bombs;
+    private Integer mines;
     private BoardStatus status;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     private List<BoardFieldCreationData> fields;
 
     private BoardCreationData(Builder builder) {
+        setUuid(builder.uuid);
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
-        setBombs(builder.bombs);
+        setMines(builder.mines);
         setStatus(builder.status);
         setCreatedAt(builder.createdAt);
         setFields(builder.fields);
@@ -32,9 +34,10 @@ public class BoardCreationData {
 
     public static Builder newBuilder(BoardCreationData copy) {
         Builder builder = new Builder();
+        builder.uuid = copy.getUuid();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
-        builder.bombs = copy.getBombs();
+        builder.mines = copy.getMines();
         builder.status = copy.getStatus();
         builder.createdAt = copy.getCreatedAt();
         builder.fields = copy.getFields();
@@ -57,12 +60,12 @@ public class BoardCreationData {
         this.columnSize = columnSize;
     }
 
-    public Integer getBombs() {
-        return bombs;
+    public Integer getMines() {
+        return mines;
     }
 
-    public void setBombs(Integer bombs) {
-        this.bombs = bombs;
+    public void setMines(Integer mines) {
+        this.mines = mines;
     }
 
     public BoardStatus getStatus() {
@@ -73,11 +76,11 @@ public class BoardCreationData {
         this.status = status;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -89,6 +92,14 @@ public class BoardCreationData {
         this.fields = fields;
     }
 
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -96,38 +107,44 @@ public class BoardCreationData {
         BoardCreationData that = (BoardCreationData) o;
         return rowSize.equals(that.rowSize) &&
             columnSize.equals(that.columnSize) &&
-            bombs.equals(that.bombs) &&
+            mines.equals(that.mines) &&
             status == that.status &&
             createdAt.equals(that.createdAt);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rowSize, columnSize, bombs, status, createdAt);
+        return Objects.hash(uuid);
     }
 
     @Override
     public String toString() {
         return "BoardCreationData{" +
-            "rowSize=" + rowSize +
+            "uuid=" + uuid +
+            ", rowSize=" + rowSize +
             ", columnSize=" + columnSize +
-            ", bombs=" + bombs +
+            ", mines=" + mines +
             ", status=" + status +
             ", createdAt=" + createdAt +
             ", fields=" + fields +
             '}';
     }
 
-
     public static final class Builder {
+        private UUID uuid;
         private Integer rowSize;
         private Integer columnSize;
-        private Integer bombs;
+        private Integer mines;
         private BoardStatus status;
-        private LocalDate createdAt;
+        private LocalDateTime createdAt;
         private List<BoardFieldCreationData> fields;
 
         private Builder() {
+        }
+
+        public Builder withUuid(UUID val) {
+            uuid = val;
+            return this;
         }
 
         public Builder withRowSize(Integer val) {
@@ -140,8 +157,8 @@ public class BoardCreationData {
             return this;
         }
 
-        public Builder withBombs(Integer val) {
-            bombs = val;
+        public Builder withMines(Integer val) {
+            mines = val;
             return this;
         }
 
@@ -150,7 +167,7 @@ public class BoardCreationData {
             return this;
         }
 
-        public Builder withCreatedAt(LocalDate val) {
+        public Builder withCreatedAt(LocalDateTime val) {
             createdAt = val;
             return this;
         }

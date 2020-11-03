@@ -6,9 +6,7 @@ import static org.hamcrest.Matchers.*;
 import org.hojeda.minesweeper.configuration.Context;
 import org.hojeda.minesweeper.core.entity.board.BasicBoardData;
 import org.hojeda.minesweeper.core.entity.board.field.MineBoardField;
-import org.hojeda.minesweeper.core.usecase.board.field.GenerateBombFields;
 import org.hojeda.minesweeper.core.usecase.board.field.GetDataToCreateBoardFields;
-import org.hojeda.minesweeper.core.usecase.board.field.PutMineIntoFieldsTemplate;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +26,7 @@ public class GetDataToCreateBoardFieldsTest {
         var givenColumnSize = 10;
         var givenMines = 10;
         var givenBasicData = BasicBoardData.newBuilder()
-            .withBombs(givenMines)
+            .withMines(givenMines)
             .withRowSize(givenRowSize)
             .withColumnSize(givenColumnSize)
             .build();

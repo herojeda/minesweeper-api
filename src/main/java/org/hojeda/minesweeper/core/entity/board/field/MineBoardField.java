@@ -57,7 +57,7 @@ public class MineBoardField {
 
     @Override
     public String toString() {
-        return "BombBoardField{" +
+        return "MinesBoardField{" +
             "rowNumber=" + rowNumber +
             ", columnNumber=" + columnNumber +
             '}';

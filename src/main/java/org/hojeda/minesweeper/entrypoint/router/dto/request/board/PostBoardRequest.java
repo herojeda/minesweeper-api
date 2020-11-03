@@ -6,7 +6,7 @@ public class PostBoardRequest {
 
     private Integer rowSize;
     private Integer columnSize;
-    private Integer bombs;
+    private Integer mines;
 
     public PostBoardRequest() {
     }
@@ -27,12 +27,12 @@ public class PostBoardRequest {
         this.columnSize = columnSize;
     }
 
-    public Integer getBombs() {
-        return bombs;
+    public Integer getMines() {
+        return mines;
     }
 
-    public void setBombs(Integer bombs) {
-        this.bombs = bombs;
+    public void setMines(Integer mines) {
+        this.mines = mines;
     }
 
     @Override
@@ -42,12 +42,12 @@ public class PostBoardRequest {
         PostBoardRequest that = (PostBoardRequest) o;
         return rowSize.equals(that.rowSize) &&
             columnSize.equals(that.columnSize) &&
-            bombs.equals(that.bombs);
+            mines.equals(that.mines);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rowSize, columnSize, bombs);
+        return Objects.hash(rowSize, columnSize, mines);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class PostBoardRequest {
         return "PostBoardRequest{" +
             "rowSize=" + rowSize +
             ", columnSize=" + columnSize +
-            ", bombs=" + bombs +
+            ", mines=" + mines +
             '}';
     }
 }
