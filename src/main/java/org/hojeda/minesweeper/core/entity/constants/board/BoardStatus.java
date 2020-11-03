@@ -7,7 +7,7 @@ public enum BoardStatus {
 
     CREATED(1L),
     PLAYING(2L),
-    WINNED(3L),
+    WON(3L),
     LOST(4L);
 
     private Long id;
@@ -25,8 +25,7 @@ public enum BoardStatus {
             .filter(boardStatus -> boardStatus.id.equals(id))
             .collect(Collectors.toList())
             .stream().findFirst()
-            .orElse(null);
-
+            .orElseThrow();
     }
 
 }

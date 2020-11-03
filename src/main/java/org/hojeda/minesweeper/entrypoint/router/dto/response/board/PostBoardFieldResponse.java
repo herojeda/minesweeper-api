@@ -5,20 +5,20 @@ import java.util.Objects;
 public class PostBoardFieldResponse {
 
     private Long id;
-    private Integer rowNumber;
-    private Integer columnNumber;
+    private Integer row;
+    private Integer column;
     private Integer value;
-    private Boolean hidden;
+    private String status;
 
     public PostBoardFieldResponse() {
     }
 
     private PostBoardFieldResponse(Builder builder) {
         setId(builder.id);
-        setRowNumber(builder.rowNumber);
-        setColumnNumber(builder.columnNumber);
+        setRow(builder.row);
+        setColumn(builder.column);
         setValue(builder.value);
-        setHidden(builder.hidden);
+        setStatus(builder.status);
     }
 
     public static Builder newBuilder() {
@@ -28,10 +28,10 @@ public class PostBoardFieldResponse {
     public static Builder newBuilder(PostBoardFieldResponse copy) {
         Builder builder = new Builder();
         builder.id = copy.getId();
-        builder.rowNumber = copy.getRowNumber();
-        builder.columnNumber = copy.getColumnNumber();
+        builder.row = copy.getRow();
+        builder.column = copy.getColumn();
         builder.value = copy.getValue();
-        builder.hidden = copy.getHidden();
+        builder.status = copy.getStatus();
         return builder;
     }
 
@@ -43,20 +43,20 @@ public class PostBoardFieldResponse {
         this.id = id;
     }
 
-    public Integer getRowNumber() {
-        return rowNumber;
+    public Integer getRow() {
+        return row;
     }
 
-    public void setRowNumber(Integer rowNumber) {
-        this.rowNumber = rowNumber;
+    public void setRow(Integer row) {
+        this.row = row;
     }
 
-    public Integer getColumnNumber() {
-        return columnNumber;
+    public Integer getColumn() {
+        return column;
     }
 
-    public void setColumnNumber(Integer columnNumber) {
-        this.columnNumber = columnNumber;
+    public void setColumn(Integer column) {
+        this.column = column;
     }
 
     public Integer getValue() {
@@ -67,12 +67,12 @@ public class PostBoardFieldResponse {
         this.value = value;
     }
 
-    public Boolean getHidden() {
-        return hidden;
+    public String getStatus() {
+        return status;
     }
 
-    public void setHidden(Boolean hidden) {
-        this.hidden = hidden;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
@@ -80,11 +80,11 @@ public class PostBoardFieldResponse {
         if (this == o) return true;
         if (!(o instanceof PostBoardFieldResponse)) return false;
         PostBoardFieldResponse that = (PostBoardFieldResponse) o;
-        return id.equals(that.id) &&
-            rowNumber.equals(that.rowNumber) &&
-            columnNumber.equals(that.columnNumber) &&
-            value.equals(that.value) &&
-            hidden.equals(that.hidden);
+        return Objects.equals(id, that.id) &&
+            Objects.equals(row, that.row) &&
+            Objects.equals(column, that.column) &&
+            Objects.equals(value, that.value) &&
+            Objects.equals(status, that.status);
     }
 
     @Override
@@ -96,20 +96,20 @@ public class PostBoardFieldResponse {
     public String toString() {
         return "PostBoardFieldResponse{" +
             "id=" + id +
-            ", rowNumber=" + rowNumber +
-            ", columnNumber=" + columnNumber +
+            ", row=" + row +
+            ", column=" + column +
             ", value=" + value +
-            ", hidden=" + hidden +
+            ", status='" + status + '\'' +
             '}';
     }
 
 
     public static final class Builder {
         private Long id;
-        private Integer rowNumber;
-        private Integer columnNumber;
+        private Integer row;
+        private Integer column;
         private Integer value;
-        private Boolean hidden;
+        private String status;
 
         private Builder() {
         }
@@ -119,13 +119,13 @@ public class PostBoardFieldResponse {
             return this;
         }
 
-        public Builder withRowNumber(Integer val) {
-            rowNumber = val;
+        public Builder withRow(Integer val) {
+            row = val;
             return this;
         }
 
-        public Builder withColumnNumber(Integer val) {
-            columnNumber = val;
+        public Builder withColumn(Integer val) {
+            column = val;
             return this;
         }
 
@@ -134,8 +134,8 @@ public class PostBoardFieldResponse {
             return this;
         }
 
-        public Builder withHidden(Boolean val) {
-            hidden = val;
+        public Builder withStatus(String val) {
+            status = val;
             return this;
         }
 

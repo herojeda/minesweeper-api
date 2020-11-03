@@ -1,5 +1,7 @@
 package org.hojeda.minesweeper.core.entity.board.field;
 
+import org.hojeda.minesweeper.core.entity.constants.board.field.BoardFieldStatus;
+
 import java.util.Objects;
 
 public class BoardField {
@@ -8,14 +10,14 @@ public class BoardField {
     private Integer rowNumber;
     private Integer columnNumber;
     private Integer value;
-    private Boolean hidden;
+    private BoardFieldStatus status;
 
     private BoardField(Builder builder) {
         setId(builder.id);
         setRowNumber(builder.rowNumber);
         setColumnNumber(builder.columnNumber);
         setValue(builder.value);
-        setHidden(builder.hidden);
+        setStatus(builder.status);
     }
 
     public static Builder newBuilder() {
@@ -28,7 +30,7 @@ public class BoardField {
         builder.rowNumber = copy.getRowNumber();
         builder.columnNumber = copy.getColumnNumber();
         builder.value = copy.getValue();
-        builder.hidden = copy.getHidden();
+        builder.status = copy.getStatus();
         return builder;
     }
 
@@ -64,12 +66,12 @@ public class BoardField {
         this.value = value;
     }
 
-    public Boolean getHidden() {
-        return hidden;
+    public BoardFieldStatus getStatus() {
+        return status;
     }
 
-    public void setHidden(Boolean hidden) {
-        this.hidden = hidden;
+    public void setStatus(BoardFieldStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -77,27 +79,16 @@ public class BoardField {
         if (this == o) return true;
         if (!(o instanceof BoardField)) return false;
         BoardField that = (BoardField) o;
-        return id.equals(that.id) &&
-            rowNumber.equals(that.rowNumber) &&
-            columnNumber.equals(that.columnNumber) &&
-            value.equals(that.value) &&
-            hidden.equals(that.hidden);
+        return Objects.equals(id, that.id) &&
+            Objects.equals(rowNumber, that.rowNumber) &&
+            Objects.equals(columnNumber, that.columnNumber) &&
+            Objects.equals(value, that.value) &&
+            status == that.status;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    @Override
-    public String toString() {
-        return "BoardField{" +
-            "id=" + id +
-            ", rowNumber=" + rowNumber +
-            ", columnNumber=" + columnNumber +
-            ", value=" + value +
-            ", hidden=" + hidden +
-            '}';
     }
 
 
@@ -106,7 +97,7 @@ public class BoardField {
         private Integer rowNumber;
         private Integer columnNumber;
         private Integer value;
-        private Boolean hidden;
+        private BoardFieldStatus status;
 
         private Builder() {
         }
@@ -131,8 +122,8 @@ public class BoardField {
             return this;
         }
 
-        public Builder withHidden(Boolean val) {
-            hidden = val;
+        public Builder withStatus(BoardFieldStatus val) {
+            status = val;
             return this;
         }
 

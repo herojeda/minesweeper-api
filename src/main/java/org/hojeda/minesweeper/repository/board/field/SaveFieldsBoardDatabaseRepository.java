@@ -16,7 +16,7 @@ public class SaveFieldsBoardDatabaseRepository {
 
     public Integer execute(BoardFieldCreationData fieldCreationData, Long boardId) {
 
-        var query = "INSERT INTO BOARD_FIELD (board_id, row_index, column_index, value, hidden)" +
+        var query = "INSERT INTO BOARD_FIELD (board_id, row_index, column_index, value, status_id)" +
             "VALUES (?, ?, ?, ?, ?)";
 
         return sqlClient.runInsertOrUpdate(
@@ -25,7 +25,7 @@ public class SaveFieldsBoardDatabaseRepository {
             fieldCreationData.getRowNumber(),
             fieldCreationData.getColumnNumber(),
             fieldCreationData.getValue(),
-            fieldCreationData.getHidden()
+            fieldCreationData.getStatus().getId()
         );
     }
 

@@ -2,6 +2,7 @@ package org.hojeda.minesweeper.core.usecase.board.field;
 
 import org.hojeda.minesweeper.core.entity.board.BasicBoardData;
 import org.hojeda.minesweeper.core.entity.board.field.BoardFieldCreationData;
+import org.hojeda.minesweeper.core.entity.constants.board.field.BoardFieldStatus;
 
 import javax.inject.Inject;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class GetDataToCreateBoardFields {
                 .map(field -> BoardFieldCreationData.newBuilder()
                     .withRowNumber(row.getKey())
                     .withColumnNumber(field.getKey())
-                    .withHidden(Boolean.TRUE)
+                    .withStatus(BoardFieldStatus.CLOSED)
                     .withValue(field.getValue())
                     .build()
                 )

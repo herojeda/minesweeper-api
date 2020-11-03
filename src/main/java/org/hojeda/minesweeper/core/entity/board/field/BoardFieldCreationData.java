@@ -1,5 +1,7 @@
 package org.hojeda.minesweeper.core.entity.board.field;
 
+import org.hojeda.minesweeper.core.entity.constants.board.field.BoardFieldStatus;
+
 import java.util.Objects;
 
 public class BoardFieldCreationData {
@@ -7,13 +9,13 @@ public class BoardFieldCreationData {
     private Integer rowNumber;
     private Integer columnNumber;
     private Integer value;
-    private Boolean hidden;
+    private BoardFieldStatus status;
 
     private BoardFieldCreationData(Builder builder) {
         setRowNumber(builder.rowNumber);
         setColumnNumber(builder.columnNumber);
         setValue(builder.value);
-        setHidden(builder.hidden);
+        setStatus(builder.status);
     }
 
     public static Builder newBuilder() {
@@ -25,7 +27,7 @@ public class BoardFieldCreationData {
         builder.rowNumber = copy.getRowNumber();
         builder.columnNumber = copy.getColumnNumber();
         builder.value = copy.getValue();
-        builder.hidden = copy.getHidden();
+        builder.status = copy.getStatus();
         return builder;
     }
 
@@ -53,12 +55,12 @@ public class BoardFieldCreationData {
         this.value = value;
     }
 
-    public Boolean getHidden() {
-        return hidden;
+    public BoardFieldStatus getStatus() {
+        return status;
     }
 
-    public void setHidden(Boolean hidden) {
-        this.hidden = hidden;
+    public void setStatus(BoardFieldStatus status) {
+        this.status = status;
     }
 
     @Override
@@ -81,7 +83,7 @@ public class BoardFieldCreationData {
             "rowNumber=" + rowNumber +
             ", columnNumber=" + columnNumber +
             ", value=" + value +
-            ", hidden=" + hidden +
+            ", status=" + status +
             '}';
     }
 
@@ -89,7 +91,7 @@ public class BoardFieldCreationData {
         private Integer rowNumber;
         private Integer columnNumber;
         private Integer value;
-        private Boolean hidden;
+        private BoardFieldStatus status;
 
         private Builder() {
         }
@@ -109,8 +111,8 @@ public class BoardFieldCreationData {
             return this;
         }
 
-        public Builder withHidden(Boolean val) {
-            hidden = val;
+        public Builder withStatus(BoardFieldStatus val) {
+            status = val;
             return this;
         }
 

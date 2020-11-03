@@ -2,6 +2,7 @@ package org.hojeda.minesweeper.repository.board.field;
 
 import org.hojeda.minesweeper.configuration.database.SqlClient;
 import org.hojeda.minesweeper.core.entity.board.field.BoardField;
+import org.hojeda.minesweeper.core.entity.constants.board.field.BoardFieldStatus;
 
 import javax.inject.Inject;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ public class GetFieldsByBoardIdDatabaseRepository {
     }
 
     public Set<BoardField> execute(Long boardId) {
-        var query = "SELECT bf.id, bf.row_index, bf.column_index, bf.value, bf.hidden" +
+        var query = "SELECT bf.id, bf.row_index, bf.column_index, bf.value, bf.status_id" +
             " FROM BOARD_FIELD bf WHERE bf.board_id = ?";
 
         return sqlClient.runQuery(
@@ -31,7 +32,7 @@ public class GetFieldsByBoardIdDatabaseRepository {
                             .withRowNumber(rs.getInt("row_index"))
                             .withColumnNumber(rs.getInt("column_index"))
                             .withValue(rs.getInt("value"))
-                            .withHidden(rs.getBoolean("hidden"))
+                            .withStatus(BoardFieldStatus.getById(rs.getLong("status_id")))
                             .build()
                     );
                 }
