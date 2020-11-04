@@ -2,7 +2,9 @@ package org.hojeda.minesweeper.core.usecase.board.movement.applier;
 
 import org.hojeda.minesweeper.core.entity.board.field.BoardField;
 import org.hojeda.minesweeper.core.entity.board.field.MineBoardField;
+import org.hojeda.minesweeper.core.repository.board.UpdateBoardFinishedAtRepository;
 import org.hojeda.minesweeper.core.repository.board.UpdateBoardStatusRepository;
+import org.hojeda.minesweeper.core.repository.board.fields.CountFieldByBoardIdAndStatusRepository;
 import org.hojeda.minesweeper.core.repository.board.fields.GetFieldsByBoardIdRepository;
 import org.hojeda.minesweeper.core.repository.board.fields.GetFieldsToMapByBoardIdRepository;
 import org.hojeda.minesweeper.core.repository.board.fields.UpdateFieldStatusByIdRepository;
@@ -10,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.IntStream;
@@ -26,18 +29,21 @@ public class ApplyOpenMovement implements ApplyMovement {
     private final GetFieldsByBoardIdRepository getFieldsByBoardIdRepository;
     private final UpdateBoardStatusRepository updateBoardStatusRepository;
     private final UpdateFieldStatusByIdRepository updateFieldStatusByIdRepository;
+    private final UpdateBoardFinishedAtRepository updateBoardFinishedAtRepository;
 
     @Inject
     public ApplyOpenMovement(
         GetFieldsToMapByBoardIdRepository getFieldsToMapByBoardIdRepository,
         GetFieldsByBoardIdRepository getFieldsByBoardIdRepository,
         UpdateBoardStatusRepository updateBoardStatusRepository,
-        UpdateFieldStatusByIdRepository updateFieldStatusByIdRepository
+        UpdateFieldStatusByIdRepository updateFieldStatusByIdRepository,
+        UpdateBoardFinishedAtRepository updateBoardFinishedAtRepository
     ) {
         this.getFieldsToMapByBoardIdRepository = getFieldsToMapByBoardIdRepository;
         this.getFieldsByBoardIdRepository = getFieldsByBoardIdRepository;
         this.updateFieldStatusByIdRepository = updateFieldStatusByIdRepository;
         this.updateBoardStatusRepository = updateBoardStatusRepository;
+        this.updateBoardFinishedAtRepository = updateBoardFinishedAtRepository;
     }
 
     public Set<BoardField> execute(BoardField boardField) {
@@ -46,6 +52,7 @@ public class ApplyOpenMovement implements ApplyMovement {
 
         if (MineBoardField.MINE_VALUE.equals(boardField.getValue())) {
             updateBoardStatusRepository.execute(boardField.getBoardId(), LOST);
+            updateBoardFinishedAtRepository.execute(boardField.getBoardId(), LocalDateTime.now());
             updateFieldStatusByIdRepository.execute(boardField.getId(), OPENED);
         } else {
             var fields = getFieldsToMapByBoardIdRepository.execute(boardField.getBoardId());

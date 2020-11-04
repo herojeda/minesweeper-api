@@ -17,7 +17,7 @@ public class GetBoardByUuidDatabaseRepository {
     }
 
     public Board execute(UUID uuid) {
-        var query = " SELECT b.id, b.uuid, b.created_at, b.status_id, b.row_size, b.column_size, b.mines " +
+        var query = " SELECT b.id, b.uuid, b.created_at, b.status_id, b.row_size, b.column_size, b.mines, b.started_at, b.finished_at " +
             " FROM BOARD b " +
             " WHERE b.uuid = ? ";
 
@@ -25,6 +25,8 @@ public class GetBoardByUuidDatabaseRepository {
             query,
             rs -> {
                 if (rs.next()) {
+                    var startedAt = rs.getTimestamp("started_at");
+                    var finishedAt = rs.getTimestamp("finished_at");
                     return Board.newBuilder()
                         .withId(rs.getLong("id"))
                         .withUuid((UUID) rs.getObject("uuid"))
@@ -33,6 +35,8 @@ public class GetBoardByUuidDatabaseRepository {
                         .withRowSize(rs.getInt("row_size"))
                         .withColumnSize(rs.getInt("column_size"))
                         .withMines(rs.getInt("mines"))
+                        .withStartedAt(startedAt != null ? startedAt.toLocalDateTime() : null)
+                        .withFinishedAt(finishedAt != null ? finishedAt.toLocalDateTime() : null)
                         .build();
                 } else return null;
             },

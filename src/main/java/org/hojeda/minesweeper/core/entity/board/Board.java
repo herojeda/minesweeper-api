@@ -17,6 +17,8 @@ public class Board {
     private Integer mines;
     private BoardStatus status;
     private LocalDateTime createdAt;
+    private LocalDateTime startedAt;
+    private LocalDateTime finishedAt;
     private Set<BoardField> fields;
 
     private Board(Builder builder) {
@@ -27,6 +29,8 @@ public class Board {
         setMines(builder.mines);
         setStatus(builder.status);
         setCreatedAt(builder.createdAt);
+        setStartedAt(builder.startedAt);
+        setFinishedAt(builder.finishedAt);
         setFields(builder.fields);
     }
 
@@ -43,6 +47,8 @@ public class Board {
         builder.mines = copy.getMines();
         builder.status = copy.getStatus();
         builder.createdAt = copy.getCreatedAt();
+        builder.startedAt = copy.getStartedAt();
+        builder.finishedAt = copy.getFinishedAt();
         builder.fields = copy.getFields();
         return builder;
     }
@@ -145,6 +151,21 @@ public class Board {
         this.fields = fields;
     }
 
+    public LocalDateTime getStartedAt() {
+        return startedAt;
+    }
+
+    public void setStartedAt(LocalDateTime startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    public LocalDateTime getFinishedAt() {
+        return finishedAt;
+    }
+
+    public void setFinishedAt(LocalDateTime finishedAt) {
+        this.finishedAt = finishedAt;
+    }
 
     public static final class Builder {
         private Long id;
@@ -154,6 +175,8 @@ public class Board {
         private Integer mines;
         private BoardStatus status;
         private LocalDateTime createdAt;
+        private LocalDateTime startedAt;
+        private LocalDateTime finishedAt;
         private Set<BoardField> fields;
 
         private Builder() {
@@ -191,6 +214,16 @@ public class Board {
 
         public Builder withCreatedAt(LocalDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder withStartedAt(LocalDateTime val) {
+            startedAt = val;
+            return this;
+        }
+
+        public Builder withFinishedAt(LocalDateTime val) {
+            finishedAt = val;
             return this;
         }
 

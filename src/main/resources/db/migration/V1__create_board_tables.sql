@@ -13,11 +13,13 @@ create sequence board_id_seq;
 create table if not exists board (
     id              bigint      not null default nextval('board_id_seq'),
     uuid            uuid        not null,
-    created_at      timestamp   not null,
     status_id       bigint      not null,
     row_size        integer     not null,
     column_size     integer     not null,
     mines           integer     not null,
+    created_at      timestamp   not null,
+    started_at      timestamp,
+    finished_at     timestamp,
 
     constraint board_pk_id     primary key (id),
     constraint board_uk_uuid unique (uuid),

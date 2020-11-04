@@ -12,17 +12,13 @@ import org.hojeda.minesweeper.configuration.database.transaction.annotation.Tran
 import org.hojeda.minesweeper.configuration.model.DatabaseConfiguration;
 import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.core.entity.constants.board.MovementType;
-import org.hojeda.minesweeper.core.repository.board.GetBoardByIdRepository;
-import org.hojeda.minesweeper.core.repository.board.SaveCompleteBoardRepository;
-import org.hojeda.minesweeper.core.repository.board.UpdateBoardStatusRepository;
+import org.hojeda.minesweeper.core.repository.board.*;
 import org.hojeda.minesweeper.core.repository.board.fields.*;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyFlagMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyOpenMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyQuestionMovement;
-import org.hojeda.minesweeper.repository.board.GetBoardByIdDatabaseRepository;
-import org.hojeda.minesweeper.repository.board.SaveCompleteBoardDatabaseRepository;
-import org.hojeda.minesweeper.repository.board.UpdateBoardStatusDatabaseRepository;
+import org.hojeda.minesweeper.repository.board.*;
 import org.hojeda.minesweeper.repository.board.field.*;
 
 import javax.sql.DataSource;
@@ -53,6 +49,9 @@ public class AppModule extends AbstractModule {
         bind(GetBoardByIdRepository.class).to(GetBoardByIdDatabaseRepository.class);
         bind(GetFieldByBoardIdAndRowAndColumnRepository.class).to(GetFieldByBoardIdAndRowAndColumnDatabaseRepository.class);
         bind(GetFieldsByBoardIdRepository.class).to(GetFieldsByBoardIdDatabaseRepository.class);
+        bind(UpdateBoardStartedAtRepository.class).to(UpdateBoardStartedAtDatabaseRepository.class);
+        bind(UpdateBoardFinishedAtRepository.class).to(UpdateBoardFinishedAtDatabaseRepository.class);
+        bind(CountFieldByBoardIdAndStatusRepository.class).to(CountFieldByBoardIdAndStatusDatabaseRepository.class);
 
         // Movement strategies
         var movementStrategies = MapBinder.newMapBinder(

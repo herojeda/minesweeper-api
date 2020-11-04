@@ -49,6 +49,8 @@ public class PatchBoardHandler implements Route {
             .withStatus(board.getStatus().name().toLowerCase())
             .withId(board.getId())
             .withRowSize(board.getRowSize())
+            .withStartedAt(board.getStartedAt())
+            .withFinishedAt(board.getFinishedAt())
             .withFields(board.getFields().stream()
                 .map(boardField -> BoardFieldResponse.newBuilder()
                     .withId(boardField.getId())

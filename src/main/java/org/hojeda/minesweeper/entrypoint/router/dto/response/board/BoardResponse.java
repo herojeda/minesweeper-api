@@ -12,6 +12,8 @@ public class BoardResponse {
     private Integer mines;
     private String status;
     private LocalDateTime createdAt;
+    private LocalDateTime startedAt;
+    private LocalDateTime finishedAt;
     private Set<BoardFieldResponse> fields;
 
     public BoardResponse() {
@@ -24,6 +26,8 @@ public class BoardResponse {
         setMines(builder.mines);
         setStatus(builder.status);
         setCreatedAt(builder.createdAt);
+        setStartedAt(builder.startedAt);
+        setFinishedAt(builder.finishedAt);
         setFields(builder.fields);
     }
 
@@ -39,8 +43,26 @@ public class BoardResponse {
         builder.mines = copy.getMines();
         builder.status = copy.getStatus();
         builder.createdAt = copy.getCreatedAt();
+        builder.startedAt = copy.getStartedAt();
+        builder.finishedAt = copy.getFinishedAt();
         builder.fields = copy.getFields();
         return builder;
+    }
+
+    public LocalDateTime getStartedAt() {
+        return startedAt;
+    }
+
+    public void setStartedAt(LocalDateTime startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    public LocalDateTime getFinishedAt() {
+        return finishedAt;
+    }
+
+    public void setFinishedAt(LocalDateTime finishedAt) {
+        this.finishedAt = finishedAt;
     }
 
     public Long getId() {
@@ -137,6 +159,8 @@ public class BoardResponse {
         private Integer mines;
         private String status;
         private LocalDateTime createdAt;
+        private LocalDateTime startedAt;
+        private LocalDateTime finishedAt;
         private Set<BoardFieldResponse> fields;
 
         private Builder() {
@@ -169,6 +193,16 @@ public class BoardResponse {
 
         public Builder withCreatedAt(LocalDateTime val) {
             createdAt = val;
+            return this;
+        }
+
+        public Builder withStartedAt(LocalDateTime val) {
+            startedAt = val;
+            return this;
+        }
+
+        public Builder withFinishedAt(LocalDateTime val) {
+            finishedAt = val;
             return this;
         }
 
