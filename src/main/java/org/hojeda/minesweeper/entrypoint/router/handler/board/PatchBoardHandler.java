@@ -3,9 +3,10 @@ package org.hojeda.minesweeper.entrypoint.router.handler.board;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.net.HttpHeaders;
 import org.eclipse.jetty.http.HttpStatus;
-import org.hojeda.minesweeper.core.entity.board.BasicBoardData;
-import org.hojeda.minesweeper.core.usecase.board.CreateBoard;
-import org.hojeda.minesweeper.entrypoint.router.dto.request.board.PostBoardRequest;
+import org.hojeda.minesweeper.core.entity.board.BoardMovement;
+import org.hojeda.minesweeper.core.entity.constants.board.MovementType;
+import org.hojeda.minesweeper.core.usecase.board.movement.MakeMovement;
+import org.hojeda.minesweeper.entrypoint.router.dto.request.board.PatchBoardRequest;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardFieldResponse;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
 import org.hojeda.minesweeper.util.entrypoint.ContentType;
@@ -17,23 +18,25 @@ import spark.Route;
 import javax.inject.Inject;
 import java.util.stream.Collectors;
 
-public class PostBoardHandler implements Route {
+public class PatchBoardHandler implements Route {
 
-    private CreateBoard createBoard;
+    private final MakeMovement makeMovement;
 
     @Inject
-    public PostBoardHandler(CreateBoard createBoard) {
-        this.createBoard = createBoard;
+    public PatchBoardHandler(MakeMovement makeMovement) {
+        this.makeMovement = makeMovement;
     }
 
     @Override
     public Object handle(Request request, Response response) throws JsonProcessingException {
-        var postBoardRequest = JsonMapper.get().readValue(request.body(), PostBoardRequest.class);
-        var board = createBoard.execute(
-            BasicBoardData.newBuilder()
-                .withMines(postBoardRequest.getMines())
-                .withColumnSize(postBoardRequest.getColumnSize())
-                .withRowSize(postBoardRequest.getRowSize())
+        var patchBoardRequest = JsonMapper.get().readValue(request.body(), PatchBoardRequest.class);
+        var boardId = request.params(":boardId");
+        var board = makeMovement.execute(
+            BoardMovement.newBuilder()
+                .withBoardId(Long.valueOf(boardId))
+                .withColumn(patchBoardRequest.getColumn())
+                .withRow(patchBoardRequest.getRow())
+                .withMovementType(MovementType.getByName(patchBoardRequest.getMovementType()))
                 .build()
         );
 

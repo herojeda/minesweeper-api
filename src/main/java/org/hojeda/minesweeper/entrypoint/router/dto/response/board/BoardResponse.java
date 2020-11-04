@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
-public class PostBoardResponse {
+public class BoardResponse {
 
     private Long id;
     private Integer rowSize;
@@ -12,12 +12,12 @@ public class PostBoardResponse {
     private Integer mines;
     private String status;
     private LocalDateTime createdAt;
-    private Set<PostBoardFieldResponse> fields;
+    private Set<BoardFieldResponse> fields;
 
-    public PostBoardResponse() {
+    public BoardResponse() {
     }
 
-    private PostBoardResponse(Builder builder) {
+    private BoardResponse(Builder builder) {
         setId(builder.id);
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
@@ -31,7 +31,7 @@ public class PostBoardResponse {
         return new Builder();
     }
 
-    public static Builder newBuilder(PostBoardResponse copy) {
+    public static Builder newBuilder(BoardResponse copy) {
         Builder builder = new Builder();
         builder.id = copy.getId();
         builder.rowSize = copy.getRowSize();
@@ -91,19 +91,19 @@ public class PostBoardResponse {
         this.createdAt = createdAt;
     }
 
-    public Set<PostBoardFieldResponse> getFields() {
+    public Set<BoardFieldResponse> getFields() {
         return fields;
     }
 
-    public void setFields(Set<PostBoardFieldResponse> fields) {
+    public void setFields(Set<BoardFieldResponse> fields) {
         this.fields = fields;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PostBoardResponse)) return false;
-        PostBoardResponse that = (PostBoardResponse) o;
+        if (!(o instanceof BoardResponse)) return false;
+        BoardResponse that = (BoardResponse) o;
         return id.equals(that.id) &&
             rowSize.equals(that.rowSize) &&
             columnSize.equals(that.columnSize) &&
@@ -137,7 +137,7 @@ public class PostBoardResponse {
         private Integer mines;
         private String status;
         private LocalDateTime createdAt;
-        private Set<PostBoardFieldResponse> fields;
+        private Set<BoardFieldResponse> fields;
 
         private Builder() {
         }
@@ -172,13 +172,13 @@ public class PostBoardResponse {
             return this;
         }
 
-        public Builder withFields(Set<PostBoardFieldResponse> val) {
+        public Builder withFields(Set<BoardFieldResponse> val) {
             fields = val;
             return this;
         }
 
-        public PostBoardResponse build() {
-            return new PostBoardResponse(this);
+        public BoardResponse build() {
+            return new BoardResponse(this);
         }
     }
 }

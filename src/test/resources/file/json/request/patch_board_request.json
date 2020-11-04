@@ -1,0 +1,5 @@
+{
+  "row" : %row%,
+  "column" : %column%,
+  "movement_type" : "%movement_type%"
+}

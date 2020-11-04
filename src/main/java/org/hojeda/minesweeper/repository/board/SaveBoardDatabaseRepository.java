@@ -15,8 +15,8 @@ public class SaveBoardDatabaseRepository {
     }
 
     public Integer execute(BoardCreationData boardCreationData) {
-        var query = "INSERT INTO BOARD(UUID, CREATED_AT, STATUS_ID, ROW_SIZE, COLUMN_SIZE, MINES)" +
-            "VALUES (?, ?, ?, ?, ?, ?)";
+        var query = " INSERT INTO BOARD(UUID, CREATED_AT, STATUS_ID, ROW_SIZE, COLUMN_SIZE, MINES) " +
+            " VALUES (?, ?, ?, ?, ?, ?) ";
 
         return sqlClient.runInsertOrUpdate(
             query,

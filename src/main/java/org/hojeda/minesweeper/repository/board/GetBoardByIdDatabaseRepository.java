@@ -3,23 +3,24 @@ package org.hojeda.minesweeper.repository.board;
 import org.hojeda.minesweeper.configuration.database.SqlClient;
 import org.hojeda.minesweeper.core.entity.board.Board;
 import org.hojeda.minesweeper.core.entity.constants.board.BoardStatus;
+import org.hojeda.minesweeper.core.repository.board.GetBoardByIdRepository;
 
 import javax.inject.Inject;
 import java.util.UUID;
 
-public class GetBoardByUuidDatabaseRepository {
+public class GetBoardByIdDatabaseRepository implements GetBoardByIdRepository {
 
     private final SqlClient sqlClient;
 
     @Inject
-    public GetBoardByUuidDatabaseRepository(SqlClient sqlClient) {
+    public GetBoardByIdDatabaseRepository(SqlClient sqlClient) {
         this.sqlClient = sqlClient;
     }
 
-    public Board execute(UUID uuid) {
+    public Board execute(Long id) {
         var query = " SELECT b.id, b.uuid, b.created_at, b.status_id, b.row_size, b.column_size, b.mines " +
             " FROM BOARD b " +
-            " WHERE b.uuid = ? ";
+            " WHERE b.id = ? ";
 
         return sqlClient.runQuery(
             query,
@@ -36,7 +37,7 @@ public class GetBoardByUuidDatabaseRepository {
                         .build();
                 } else return null;
             },
-            uuid
+            id
         );
     }
 

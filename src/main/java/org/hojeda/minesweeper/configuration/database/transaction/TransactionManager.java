@@ -11,7 +11,7 @@ import javax.sql.DataSource;
 
 public class TransactionManager implements MethodInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(TransactionManager.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransactionManager.class);
 
     private TransactionalDataSource dataSource;
 
@@ -32,7 +32,7 @@ public class TransactionManager implements MethodInterceptor {
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         try (TransactionalDataSource txDataSource = dataSource) {
-            logger.info("Beginning transaction for: "
+            LOGGER.info("Beginning transaction for: "
                     + invocation.getThis().getClass().getName() + "."
                     + invocation.getMethod().getName() + "()");
 
@@ -41,14 +41,14 @@ public class TransactionManager implements MethodInterceptor {
             Object o = invocation.proceed();
             txDataSource.finalizeTransaction();
 
-            logger.info("Finalize transaction for: "
+            LOGGER.info("Finalize transaction for: "
                     + invocation.getThis().getClass().getName() + "."
-                    + invocation.getMethod().getName() + "() \n"
+                    + invocation.getMethod().getName() + "() - "
                     + "Time elapsed: [" + (System.currentTimeMillis() - beginTrxTime) + " Milliseconds]"
             );
             return o;
         } catch (Exception e) {
-            logger.error(e.getClass().getName() + ": Transaction failed and rollback for: " + e.getMessage(), e);
+            LOGGER.error(e.getClass().getName() + ": Transaction failed and rollback for: " + e.getMessage(), e);
             dataSource.rollback();
             throw e;
         }

@@ -2,7 +2,7 @@ package org.hojeda.minesweeper.entrypoint.router.dto.response.board;
 
 import java.util.Objects;
 
-public class PostBoardFieldResponse {
+public class BoardFieldResponse {
 
     private Long id;
     private Integer row;
@@ -10,10 +10,10 @@ public class PostBoardFieldResponse {
     private Integer value;
     private String status;
 
-    public PostBoardFieldResponse() {
+    public BoardFieldResponse() {
     }
 
-    private PostBoardFieldResponse(Builder builder) {
+    private BoardFieldResponse(Builder builder) {
         setId(builder.id);
         setRow(builder.row);
         setColumn(builder.column);
@@ -25,7 +25,7 @@ public class PostBoardFieldResponse {
         return new Builder();
     }
 
-    public static Builder newBuilder(PostBoardFieldResponse copy) {
+    public static Builder newBuilder(BoardFieldResponse copy) {
         Builder builder = new Builder();
         builder.id = copy.getId();
         builder.row = copy.getRow();
@@ -78,8 +78,8 @@ public class PostBoardFieldResponse {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof PostBoardFieldResponse)) return false;
-        PostBoardFieldResponse that = (PostBoardFieldResponse) o;
+        if (!(o instanceof BoardFieldResponse)) return false;
+        BoardFieldResponse that = (BoardFieldResponse) o;
         return Objects.equals(id, that.id) &&
             Objects.equals(row, that.row) &&
             Objects.equals(column, that.column) &&
@@ -139,8 +139,8 @@ public class PostBoardFieldResponse {
             return this;
         }
 
-        public PostBoardFieldResponse build() {
-            return new PostBoardFieldResponse(this);
+        public BoardFieldResponse build() {
+            return new BoardFieldResponse(this);
         }
     }
 }

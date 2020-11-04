@@ -7,7 +7,7 @@ import org.hojeda.minesweeper.configuration.Context;
 import org.hojeda.minesweeper.configuration.database.SqlClient;
 import org.hojeda.minesweeper.core.entity.board.field.MineBoardField;
 import org.hojeda.minesweeper.entrypoint.router.Routes;
-import org.hojeda.minesweeper.entrypoint.router.dto.response.board.PostBoardResponse;
+import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
 import org.hojeda.minesweeper.util.JsonLoader;
 import org.hojeda.minesweeper.util.base.FunctionalTest;
 import org.hojeda.minesweeper.util.mapper.JsonMapper;
@@ -46,7 +46,7 @@ public class PostBoardTest extends FunctionalTest {
         // Validate status, should be 201
         assertThat(response.getStatus(), is(HttpStatus.SC_CREATED));
 
-        var body = JsonMapper.get().readValue(response.getBody(), PostBoardResponse.class);
+        var body = JsonMapper.get().readValue(response.getBody(), BoardResponse.class);
         assertThat(body.getFields().size(), is(givenRowSize * givenColumnSize));
         assertThat(
             body.getFields().stream()

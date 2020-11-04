@@ -7,6 +7,7 @@ import java.util.Objects;
 public class BoardField {
 
     private Long id;
+    private Long boardId;
     private Integer rowNumber;
     private Integer columnNumber;
     private Integer value;
@@ -14,6 +15,7 @@ public class BoardField {
 
     private BoardField(Builder builder) {
         setId(builder.id);
+        setBoardId(builder.boardId);
         setRowNumber(builder.rowNumber);
         setColumnNumber(builder.columnNumber);
         setValue(builder.value);
@@ -27,6 +29,7 @@ public class BoardField {
     public static Builder newBuilder(BoardField copy) {
         Builder builder = new Builder();
         builder.id = copy.getId();
+        builder.boardId = copy.getBoardId();
         builder.rowNumber = copy.getRowNumber();
         builder.columnNumber = copy.getColumnNumber();
         builder.value = copy.getValue();
@@ -74,6 +77,14 @@ public class BoardField {
         this.status = status;
     }
 
+    public Long getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(Long boardId) {
+        this.boardId = boardId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,9 +102,21 @@ public class BoardField {
         return Objects.hash(id);
     }
 
+    @Override
+    public String toString() {
+        return "BoardField{" +
+            "id=" + id +
+            ", boardId=" + boardId +
+            ", rowNumber=" + rowNumber +
+            ", columnNumber=" + columnNumber +
+            ", value=" + value +
+            ", status=" + status +
+            '}';
+    }
 
     public static final class Builder {
         private Long id;
+        private Long boardId;
         private Integer rowNumber;
         private Integer columnNumber;
         private Integer value;
@@ -104,6 +127,11 @@ public class BoardField {
 
         public Builder withId(Long val) {
             id = val;
+            return this;
+        }
+
+        public Builder withBoardId(Long val) {
+            boardId = val;
             return this;
         }
 
