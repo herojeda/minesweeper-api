@@ -25,27 +25,10 @@ import static org.hojeda.minesweeper.core.entity.constants.board.field.BoardFiel
 
 public class PatchBoardTest extends FunctionalTest {
 
-    private BoardResponse createdBoard;
-
-    @BeforeEach
-    public void setUp() throws JsonProcessingException {
-        var response = Unirest.post(baseUrl + Routes.BOARD)
-            .body(
-                JsonLoader.readFromFile(
-                    "/file/json/request/post_board_request.json",
-                    Map.of(
-                        "row_size", String.valueOf(10),
-                        "column_size", String.valueOf(10),
-                        "mines", String.valueOf(10)
-                    )
-                )
-            )
-            .asString();
-        createdBoard = JsonMapper.get().readValue(response.getBody(), BoardResponse.class);
-    }
-
     @Test
     public void when_open_field_with_0_should_open_adyacents_fields() throws JsonProcessingException {
+
+        var createdBoard = createBoard();
 
         var givenMovementType = MovementType.OPEN;
 
@@ -101,6 +84,8 @@ public class PatchBoardTest extends FunctionalTest {
     @Test
     public void when_open_field_with_mine_should_return_board_with_status_lost() throws JsonProcessingException {
 
+        var createdBoard = createBoard();
+
         var givenMovementType = MovementType.OPEN;
 
         var fieldWithMine = createdBoard.getFields().stream()
@@ -140,6 +125,8 @@ public class PatchBoardTest extends FunctionalTest {
     @Test
     public void when_flag_field_should_return_flagged_field() throws JsonProcessingException {
 
+        var createdBoard = createBoard();
+
         var givenMovementType = MovementType.FLAG;
 
         var aField = createdBoard.getFields().stream()
@@ -167,16 +154,18 @@ public class PatchBoardTest extends FunctionalTest {
 
         assertThat(body.getStatus(), equalToIgnoringCase(PLAYING.name()));
 
-        var returnedMineField = body.getFields().stream()
+        var returnedField = body.getFields().stream()
             .filter(field -> field.getColumn().equals(aField.getColumn()) && field.getRow().equals(aField.getRow()))
             .findFirst()
             .get();
 
-        assertThat(returnedMineField.getStatus(), equalToIgnoringCase(FLAGGED.name()));
+        assertThat(returnedField.getStatus(), equalToIgnoringCase(FLAGGED.name()));
     }
 
     @Test
     public void when_flag_field_should_return_questioned_field() throws JsonProcessingException {
+
+        var createdBoard = createBoard();
 
         var givenMovementType = MovementType.QUESTION;
 
@@ -211,5 +200,21 @@ public class PatchBoardTest extends FunctionalTest {
             .get();
 
         assertThat(returnedMineField.getStatus(), equalToIgnoringCase(QUESTIONED.name()));
+    }
+
+    private BoardResponse createBoard() throws JsonProcessingException {
+        var response = Unirest.post(baseUrl + Routes.BOARD)
+            .body(
+                JsonLoader.readFromFile(
+                    "/file/json/request/post_board_request.json",
+                    Map.of(
+                        "row_size", String.valueOf(10),
+                        "column_size", String.valueOf(10),
+                        "mines", String.valueOf(10)
+                    )
+                )
+            )
+            .asString();
+        return JsonMapper.get().readValue(response.getBody(), BoardResponse.class);
     }
 }

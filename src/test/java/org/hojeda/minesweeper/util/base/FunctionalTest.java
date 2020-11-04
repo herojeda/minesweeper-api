@@ -33,11 +33,4 @@ public abstract class FunctionalTest {
         }
     }
 
-    @AfterEach
-    public void cleanUp() throws InterruptedException {
-        main.destroy();
-        Thread.sleep(100);
-        isInitialized = false;
-    }
-
 }
