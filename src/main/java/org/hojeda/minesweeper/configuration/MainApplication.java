@@ -4,8 +4,9 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.flywaydb.core.Flyway;
 import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.entrypoint.router.base.HealthCheckRouter;
-import org.hojeda.minesweeper.entrypoint.router.board.BoardRouter;
+import org.hojeda.minesweeper.entrypoint.router.route.board.BoardRouter;
 import org.hojeda.minesweeper.entrypoint.router.error.ErrorHandler;
+import org.hojeda.minesweeper.entrypoint.router.route.user.UserRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -31,6 +32,7 @@ public class MainApplication implements SparkApplication, RouteGroup {
     public void addRoutes() {
         Context.getInjector().getInstance(HealthCheckRouter.class).addRoutes();
         Context.getInjector().getInstance(BoardRouter.class).addRoutes();
+        Context.getInjector().getInstance(UserRouter.class).addRoutes();
         Context.getInjector().getInstance(ErrorHandler.class).addErrorHandler();
     }
 

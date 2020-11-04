@@ -14,12 +14,20 @@ import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.core.entity.constants.board.MovementType;
 import org.hojeda.minesweeper.core.repository.board.*;
 import org.hojeda.minesweeper.core.repository.board.fields.*;
+import org.hojeda.minesweeper.core.repository.user.GetUserByIdRepository;
+import org.hojeda.minesweeper.core.repository.user.GetUserByNameRepository;
+import org.hojeda.minesweeper.core.repository.user.GetUsersRepository;
+import org.hojeda.minesweeper.core.repository.user.SaveUserRepository;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyFlagMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyOpenMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyQuestionMovement;
 import org.hojeda.minesweeper.repository.board.*;
 import org.hojeda.minesweeper.repository.board.field.*;
+import org.hojeda.minesweeper.repository.user.GetUserByIdDatabaseRepository;
+import org.hojeda.minesweeper.repository.user.GetUserByNameDatabaseRepository;
+import org.hojeda.minesweeper.repository.user.GetUsersDatabaseRepository;
+import org.hojeda.minesweeper.repository.user.SaveUserDatabaseRepository;
 
 import javax.sql.DataSource;
 
@@ -42,16 +50,20 @@ public class AppModule extends AbstractModule {
 
         // Repositories
         bind(SaveCompleteBoardRepository.class).to(SaveCompleteBoardDatabaseRepository.class);
+        bind(SaveUserRepository.class).to(SaveUserDatabaseRepository.class);
         bind(UpdateFieldStatusRepository.class).to(UpdateFieldStatusDatabaseRepository.class);
         bind(UpdateBoardStatusRepository.class).to(UpdateBoardStatusDatabaseRepository.class);
         bind(UpdateFieldStatusByIdRepository.class).to(UpdateFieldStatusByIdDatabaseRepository.class);
+        bind(UpdateBoardStartedAtRepository.class).to(UpdateBoardStartedAtDatabaseRepository.class);
+        bind(UpdateBoardFinishedAtRepository.class).to(UpdateBoardFinishedAtDatabaseRepository.class);
+        bind(CountFieldByBoardIdAndStatusRepository.class).to(CountFieldByBoardIdAndStatusDatabaseRepository.class);
         bind(GetFieldsToMapByBoardIdRepository.class).to(GetFieldsToMapByBoardIdDatabaseRepository.class);
         bind(GetBoardByIdRepository.class).to(GetBoardByIdDatabaseRepository.class);
         bind(GetFieldByBoardIdAndRowAndColumnRepository.class).to(GetFieldByBoardIdAndRowAndColumnDatabaseRepository.class);
         bind(GetFieldsByBoardIdRepository.class).to(GetFieldsByBoardIdDatabaseRepository.class);
-        bind(UpdateBoardStartedAtRepository.class).to(UpdateBoardStartedAtDatabaseRepository.class);
-        bind(UpdateBoardFinishedAtRepository.class).to(UpdateBoardFinishedAtDatabaseRepository.class);
-        bind(CountFieldByBoardIdAndStatusRepository.class).to(CountFieldByBoardIdAndStatusDatabaseRepository.class);
+        bind(GetUsersRepository.class).to(GetUsersDatabaseRepository.class);
+        bind(GetUserByIdRepository.class).to(GetUserByIdDatabaseRepository.class);
+        bind(GetUserByNameRepository.class).to(GetUserByNameDatabaseRepository.class);
 
         // Movement strategies
         var movementStrategies = MapBinder.newMapBinder(

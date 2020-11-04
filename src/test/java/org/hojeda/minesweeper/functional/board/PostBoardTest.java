@@ -6,7 +6,7 @@ import org.apache.http.HttpStatus;
 import org.hojeda.minesweeper.configuration.Context;
 import org.hojeda.minesweeper.configuration.database.SqlClient;
 import org.hojeda.minesweeper.core.entity.board.field.MineBoardField;
-import org.hojeda.minesweeper.entrypoint.router.Routes;
+import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
 import org.hojeda.minesweeper.util.JsonLoader;
 import org.hojeda.minesweeper.util.base.FunctionalTest;

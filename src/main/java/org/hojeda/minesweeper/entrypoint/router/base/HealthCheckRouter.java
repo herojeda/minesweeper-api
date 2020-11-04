@@ -1,6 +1,6 @@
 package org.hojeda.minesweeper.entrypoint.router.base;
 
-import org.hojeda.minesweeper.entrypoint.router.Routes;
+import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.entrypoint.router.handler.base.HealthCheckHandler;
 import spark.RouteGroup;
 import spark.Spark;

@@ -2,7 +2,7 @@ package org.hojeda.minesweeper.functional.healthcheck;
 
 import kong.unirest.Unirest;
 import org.apache.http.HttpStatus;
-import org.hojeda.minesweeper.entrypoint.router.Routes;
+import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.util.base.FunctionalTest;
 import org.junit.jupiter.api.Test;
 

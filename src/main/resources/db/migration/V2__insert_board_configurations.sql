@@ -12,3 +12,6 @@ insert into board_field_status(id, name) values
 (2, 'FLAGGED'),
 (3, 'QUESTIONED'),
 (4, 'OPENED');
+
+------------------ Board Status ------------------
+insert into user(name) values ('Default');

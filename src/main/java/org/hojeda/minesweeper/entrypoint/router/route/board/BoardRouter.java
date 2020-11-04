@@ -1,6 +1,6 @@
-package org.hojeda.minesweeper.entrypoint.router.board;
+package org.hojeda.minesweeper.entrypoint.router.route.board;
 
-import org.hojeda.minesweeper.entrypoint.router.Routes;
+import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.GetBoardHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.PatchBoardHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.PostBoardHandler;

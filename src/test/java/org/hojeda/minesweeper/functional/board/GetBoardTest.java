@@ -3,7 +3,7 @@ package org.hojeda.minesweeper.functional.board;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import kong.unirest.Unirest;
 import org.apache.http.HttpStatus;
-import org.hojeda.minesweeper.entrypoint.router.Routes;
+import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
 import org.hojeda.minesweeper.util.JsonLoader;
 import org.hojeda.minesweeper.util.base.FunctionalTest;

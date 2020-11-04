@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import kong.unirest.Unirest;
 import org.hojeda.minesweeper.core.entity.board.field.MineBoardField;
 import org.hojeda.minesweeper.core.entity.constants.board.MovementType;
-import org.hojeda.minesweeper.entrypoint.router.Routes;
+import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardFieldResponse;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
 import org.hojeda.minesweeper.util.JsonLoader;
