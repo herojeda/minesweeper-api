@@ -5,6 +5,7 @@ import com.google.common.net.HttpHeaders;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hojeda.minesweeper.core.entity.board.BoardMovement;
 import org.hojeda.minesweeper.core.entity.constants.board.MovementType;
+import org.hojeda.minesweeper.core.usecase.board.GetBoard;
 import org.hojeda.minesweeper.core.usecase.board.movement.MakeMovement;
 import org.hojeda.minesweeper.entrypoint.router.dto.request.board.PatchBoardRequest;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardFieldResponse;
@@ -18,27 +19,19 @@ import spark.Route;
 import javax.inject.Inject;
 import java.util.stream.Collectors;
 
-public class PatchBoardHandler implements Route {
+public class GetBoardHandler implements Route {
 
-    private final MakeMovement makeMovement;
+    private final GetBoard getBoard;
 
     @Inject
-    public PatchBoardHandler(MakeMovement makeMovement) {
-        this.makeMovement = makeMovement;
+    public GetBoardHandler(GetBoard getBoard) {
+        this.getBoard = getBoard;
     }
 
     @Override
     public Object handle(Request request, Response response) throws JsonProcessingException {
-        var patchBoardRequest = JsonMapper.get().readValue(request.body(), PatchBoardRequest.class);
         var boardId = request.params(":boardId");
-        var board = makeMovement.execute(
-            BoardMovement.newBuilder()
-                .withBoardId(Long.valueOf(boardId))
-                .withColumn(patchBoardRequest.getColumn())
-                .withRow(patchBoardRequest.getRow())
-                .withMovementType(MovementType.getByName(patchBoardRequest.getMovementType()))
-                .build()
-        );
+        var board = getBoard.execute(Long.valueOf(boardId));
 
         response.status(HttpStatus.OK_200);
         response.header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.content());

@@ -10,7 +10,6 @@ import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse
 import org.hojeda.minesweeper.util.JsonLoader;
 import org.hojeda.minesweeper.util.base.FunctionalTest;
 import org.hojeda.minesweeper.util.mapper.JsonMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
@@ -29,9 +28,7 @@ public class PatchBoardTest extends FunctionalTest {
     public void when_open_field_with_0_should_open_adyacents_fields() throws JsonProcessingException {
 
         var createdBoard = createBoard();
-
         var givenMovementType = MovementType.OPEN;
-
         var fieldWithZero = createdBoard.getFields().stream()
             .filter(field -> field.getValue() == 0)
             .findAny()
@@ -85,9 +82,7 @@ public class PatchBoardTest extends FunctionalTest {
     public void when_open_field_with_mine_should_return_board_with_status_lost() throws JsonProcessingException {
 
         var createdBoard = createBoard();
-
         var givenMovementType = MovementType.OPEN;
-
         var fieldWithMine = createdBoard.getFields().stream()
             .filter(field -> field.getValue().equals(MineBoardField.MINE_VALUE))
             .findAny()
@@ -126,9 +121,7 @@ public class PatchBoardTest extends FunctionalTest {
     public void when_flag_field_should_return_flagged_field() throws JsonProcessingException {
 
         var createdBoard = createBoard();
-
         var givenMovementType = MovementType.FLAG;
-
         var aField = createdBoard.getFields().stream()
             .findAny()
             .get();
@@ -166,9 +159,7 @@ public class PatchBoardTest extends FunctionalTest {
     public void when_flag_field_should_return_questioned_field() throws JsonProcessingException {
 
         var createdBoard = createBoard();
-
         var givenMovementType = MovementType.QUESTION;
-
         var aField = createdBoard.getFields().stream()
             .findAny()
             .get();
