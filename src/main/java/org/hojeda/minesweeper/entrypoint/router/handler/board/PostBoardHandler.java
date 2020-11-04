@@ -8,6 +8,7 @@ import org.hojeda.minesweeper.core.usecase.board.CreateBoard;
 import org.hojeda.minesweeper.entrypoint.router.dto.request.board.PostBoardRequest;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardFieldResponse;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
+import org.hojeda.minesweeper.entrypoint.router.validator.ValidatePostBoardRequest;
 import org.hojeda.minesweeper.util.entrypoint.ContentType;
 import org.hojeda.minesweeper.util.mapper.JsonMapper;
 import spark.Request;
@@ -19,16 +20,20 @@ import java.util.stream.Collectors;
 
 public class PostBoardHandler implements Route {
 
-    private CreateBoard createBoard;
+    private final CreateBoard createBoard;
+    private final ValidatePostBoardRequest validatePostBoardRequest;
 
     @Inject
-    public PostBoardHandler(CreateBoard createBoard) {
+    public PostBoardHandler(CreateBoard createBoard, ValidatePostBoardRequest validatePostBoardRequest) {
         this.createBoard = createBoard;
+        this.validatePostBoardRequest = validatePostBoardRequest;
     }
 
     @Override
     public Object handle(Request request, Response response) throws JsonProcessingException {
         var postBoardRequest = JsonMapper.get().readValue(request.body(), PostBoardRequest.class);
+        validatePostBoardRequest.execute(postBoardRequest);
+
         var board = createBoard.execute(
             BasicBoardData.newBuilder()
                 .withMines(postBoardRequest.getMines())

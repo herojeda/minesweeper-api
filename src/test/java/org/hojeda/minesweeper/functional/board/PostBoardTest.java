@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 
 public class PostBoardTest extends FunctionalTest {
@@ -79,5 +80,135 @@ public class PostBoardTest extends FunctionalTest {
             body.getId()
         );
         assertThat(minesCount, is(givenMines));
+    }
+
+    @Test
+    public void when_post_a_board_with_small_row_should_return_400() throws JsonProcessingException {
+
+        var givenRowSize = 9;
+        var givenColumnSize = 10;
+        var givenMines = 10;
+        var givenUri = baseUrl + Routes.BOARD;
+        var givenBody = JsonLoader.readFromFile(
+            "/file/json/request/post_board_request.json",
+            Map.of(
+                "row_size", String.valueOf(givenRowSize),
+                "column_size", String.valueOf(givenColumnSize),
+                "mines", String.valueOf(givenMines)
+            )
+        );
+
+        var response = Unirest.post(givenUri)
+            .body(givenBody)
+            .asString();
+
+        System.out.println(response.getBody());
+
+        assertThat(response.getStatus(), is(HttpStatus.SC_BAD_REQUEST));
+        assertThat(response.getBody(), containsString("ROW_SIZE_LIMIT_EXCEEDED"));
+    }
+
+    @Test
+    public void when_post_a_board_with_big_row_should_return_400() throws JsonProcessingException {
+
+        var givenRowSize = 501;
+        var givenColumnSize = 10;
+        var givenMines = 10;
+        var givenUri = baseUrl + Routes.BOARD;
+        var givenBody = JsonLoader.readFromFile(
+            "/file/json/request/post_board_request.json",
+            Map.of(
+                "row_size", String.valueOf(givenRowSize),
+                "column_size", String.valueOf(givenColumnSize),
+                "mines", String.valueOf(givenMines)
+            )
+        );
+
+        var response = Unirest.post(givenUri)
+            .body(givenBody)
+            .asString();
+
+        System.out.println(response.getBody());
+
+        assertThat(response.getStatus(), is(HttpStatus.SC_BAD_REQUEST));
+        assertThat(response.getBody(), containsString("ROW_SIZE_LIMIT_EXCEEDED"));
+    }
+
+    @Test
+    public void when_post_a_board_with_small_column_should_return_400() throws JsonProcessingException {
+
+        var givenRowSize = 10;
+        var givenColumnSize = 9;
+        var givenMines = 10;
+        var givenUri = baseUrl + Routes.BOARD;
+        var givenBody = JsonLoader.readFromFile(
+            "/file/json/request/post_board_request.json",
+            Map.of(
+                "row_size", String.valueOf(givenRowSize),
+                "column_size", String.valueOf(givenColumnSize),
+                "mines", String.valueOf(givenMines)
+            )
+        );
+
+        var response = Unirest.post(givenUri)
+            .body(givenBody)
+            .asString();
+
+        System.out.println(response.getBody());
+
+        assertThat(response.getStatus(), is(HttpStatus.SC_BAD_REQUEST));
+        assertThat(response.getBody(), containsString("COLUMN_SIZE_LIMIT_EXCEEDED"));
+    }
+
+    @Test
+    public void when_post_a_board_with_big_column_should_return_400() throws JsonProcessingException {
+
+        var givenRowSize = 10;
+        var givenColumnSize = 501;
+        var givenMines = 10;
+        var givenUri = baseUrl + Routes.BOARD;
+        var givenBody = JsonLoader.readFromFile(
+            "/file/json/request/post_board_request.json",
+            Map.of(
+                "row_size", String.valueOf(givenRowSize),
+                "column_size", String.valueOf(givenColumnSize),
+                "mines", String.valueOf(givenMines)
+            )
+        );
+
+        var response = Unirest.post(givenUri)
+            .body(givenBody)
+            .asString();
+
+        System.out.println(response.getBody());
+
+        assertThat(response.getStatus(), is(HttpStatus.SC_BAD_REQUEST));
+        assertThat(response.getBody(), containsString("COLUMN_SIZE_LIMIT_EXCEEDED"));
+    }
+
+    @Test
+    public void when_post_a_board_with_more_mines_than_fields_should_return_400() throws JsonProcessingException {
+
+        var givenRowSize = 10;
+        var givenColumnSize = 10;
+        var givenMines = 101;
+        var givenUri = baseUrl + Routes.BOARD;
+        var givenBody = JsonLoader.readFromFile(
+            "/file/json/request/post_board_request.json",
+            Map.of(
+                "row_size", String.valueOf(givenRowSize),
+                "column_size", String.valueOf(givenColumnSize),
+                "mines", String.valueOf(givenMines)
+            )
+        );
+
+        var response = Unirest.post(givenUri)
+            .body(givenBody)
+            .asString();
+
+        System.out.println(response.getBody());
+
+        assertThat(response.getStatus(), is(HttpStatus.SC_BAD_REQUEST));
+        assertThat(response.getBody(), containsString("MINES_EXCEEDED_BOARD_SIZE"));
     }
 }
