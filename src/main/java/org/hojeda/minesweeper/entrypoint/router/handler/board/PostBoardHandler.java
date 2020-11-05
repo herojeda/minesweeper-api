@@ -36,6 +36,7 @@ public class PostBoardHandler implements Route {
 
         var board = createBoard.execute(
             BasicBoardData.newBuilder()
+                .withUserId(postBoardRequest.getUserId())
                 .withMines(postBoardRequest.getMines())
                 .withColumnSize(postBoardRequest.getColumnSize())
                 .withRowSize(postBoardRequest.getRowSize())

@@ -22,7 +22,7 @@ create table if not exists board_status (
 create sequence board_id_seq;
 create table if not exists board (
     id              bigint      not null default nextval('board_id_seq'),
---    user_id         bigint      not null,
+    user_id         bigint      not null,
     uuid            uuid        not null,
     status_id       bigint      not null,
     row_size        integer     not null,
@@ -34,8 +34,8 @@ create table if not exists board (
 
     constraint board_pk_id     primary key (id),
     constraint board_uk_uuid unique (uuid),
-    constraint board_fk_board_status foreign key (status_id) references board_status(id)
---    constraint board_fk_user foreign key (user_id) references user(id)
+    constraint board_fk_board_status foreign key (status_id) references board_status(id),
+    constraint board_fk_user foreign key (user_id) references user(id)
 );
 
 ------------------ Board Field Status ------------------

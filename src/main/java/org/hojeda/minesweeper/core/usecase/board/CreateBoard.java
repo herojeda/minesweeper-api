@@ -14,6 +14,8 @@ import java.util.UUID;
 
 public class CreateBoard {
 
+    private static final Long DEFAULT_USER_ID = 1L;
+
     private GetDataToCreateBoardFields getDataToCreateBoardFields;
     private SaveCompleteBoardRepository saveBoardRepository;
 
@@ -25,8 +27,11 @@ public class CreateBoard {
 
     public Board execute(BasicBoardData basicBoardData) {
 
+        var userId = basicBoardData.getUserId() != null ? basicBoardData.getUserId() : DEFAULT_USER_ID;
+
         var creationData = BoardCreationData.newBuilder()
             .withUuid(UUID.randomUUID())
+            .withUserId(userId)
             .withMines(basicBoardData.getMines())
             .withColumnSize(basicBoardData.getColumnSize())
             .withRowSize(basicBoardData.getRowSize())

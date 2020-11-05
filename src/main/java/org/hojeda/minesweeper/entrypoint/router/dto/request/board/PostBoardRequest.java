@@ -7,8 +7,17 @@ public class PostBoardRequest {
     private Integer rowSize;
     private Integer columnSize;
     private Integer mines;
+    private Long userId;
 
     public PostBoardRequest() {
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getRowSize() {
@@ -40,14 +49,15 @@ public class PostBoardRequest {
         if (this == o) return true;
         if (!(o instanceof PostBoardRequest)) return false;
         PostBoardRequest that = (PostBoardRequest) o;
-        return rowSize.equals(that.rowSize) &&
-            columnSize.equals(that.columnSize) &&
-            mines.equals(that.mines);
+        return Objects.equals(rowSize, that.rowSize) &&
+            Objects.equals(columnSize, that.columnSize) &&
+            Objects.equals(mines, that.mines) &&
+            Objects.equals(userId, that.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(rowSize, columnSize, mines);
+        return Objects.hash(rowSize, columnSize, mines, userId);
     }
 
     @Override
@@ -56,6 +66,8 @@ public class PostBoardRequest {
             "rowSize=" + rowSize +
             ", columnSize=" + columnSize +
             ", mines=" + mines +
+            ", userId=" + userId +
             '}';
     }
 }
+

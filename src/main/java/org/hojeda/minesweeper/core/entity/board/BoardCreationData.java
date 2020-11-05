@@ -11,6 +11,7 @@ import java.util.UUID;
 public class BoardCreationData {
 
     private UUID uuid;
+    private Long userId;
     private Integer rowSize;
     private Integer columnSize;
     private Integer mines;
@@ -20,6 +21,7 @@ public class BoardCreationData {
 
     private BoardCreationData(Builder builder) {
         setUuid(builder.uuid);
+        setUserId(builder.userId);
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
         setMines(builder.mines);
@@ -35,6 +37,7 @@ public class BoardCreationData {
     public static Builder newBuilder(BoardCreationData copy) {
         Builder builder = new Builder();
         builder.uuid = copy.getUuid();
+        builder.userId = copy.getUserId();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
         builder.mines = copy.getMines();
@@ -100,16 +103,26 @@ public class BoardCreationData {
         this.uuid = uuid;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof BoardCreationData)) return false;
         BoardCreationData that = (BoardCreationData) o;
-        return rowSize.equals(that.rowSize) &&
-            columnSize.equals(that.columnSize) &&
-            mines.equals(that.mines) &&
+        return Objects.equals(uuid, that.uuid) &&
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(rowSize, that.rowSize) &&
+            Objects.equals(columnSize, that.columnSize) &&
+            Objects.equals(mines, that.mines) &&
             status == that.status &&
-            createdAt.equals(that.createdAt);
+            Objects.equals(createdAt, that.createdAt);
     }
 
     @Override
@@ -121,6 +134,7 @@ public class BoardCreationData {
     public String toString() {
         return "BoardCreationData{" +
             "uuid=" + uuid +
+            ", userId=" + userId +
             ", rowSize=" + rowSize +
             ", columnSize=" + columnSize +
             ", mines=" + mines +
@@ -132,6 +146,7 @@ public class BoardCreationData {
 
     public static final class Builder {
         private UUID uuid;
+        private Long userId;
         private Integer rowSize;
         private Integer columnSize;
         private Integer mines;
@@ -144,6 +159,11 @@ public class BoardCreationData {
 
         public Builder withUuid(UUID val) {
             uuid = val;
+            return this;
+        }
+
+        public Builder withUserId(Long val) {
+            userId = val;
             return this;
         }
 
