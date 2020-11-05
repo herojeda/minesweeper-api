@@ -1,7 +1,7 @@
 package org.hojeda.minesweeper.entrypoint.router.error;
 
 import org.eclipse.jetty.http.HttpStatus;
-import org.hojeda.minesweeper.util.mapper.JsonMapper;
+import org.hojeda.minesweeper.configuration.mapper.JsonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import spark.Request;

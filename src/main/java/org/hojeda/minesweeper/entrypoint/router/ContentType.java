@@ -1,4 +1,4 @@
-package org.hojeda.minesweeper.util.entrypoint;
+package org.hojeda.minesweeper.entrypoint.router;
 
 public enum ContentType {
 

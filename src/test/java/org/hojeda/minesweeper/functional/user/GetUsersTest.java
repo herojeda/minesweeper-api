@@ -7,7 +7,7 @@ import org.apache.http.HttpStatus;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.user.UserResponse;
 import org.hojeda.minesweeper.entrypoint.router.route.Routes;
 import org.hojeda.minesweeper.util.base.FunctionalTest;
-import org.hojeda.minesweeper.util.mapper.JsonMapper;
+import org.hojeda.minesweeper.configuration.mapper.JsonMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

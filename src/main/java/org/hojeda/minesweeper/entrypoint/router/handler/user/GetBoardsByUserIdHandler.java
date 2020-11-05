@@ -5,7 +5,7 @@ import org.eclipse.jetty.http.HttpStatus;
 import org.hojeda.minesweeper.core.usecase.user.GetBoardsByUserId;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardFieldResponse;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.board.BoardResponse;
-import org.hojeda.minesweeper.util.entrypoint.ContentType;
+import org.hojeda.minesweeper.entrypoint.router.ContentType;
 import spark.Request;
 import spark.Response;
 import spark.Route;

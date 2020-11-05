@@ -9,6 +9,7 @@ import org.hojeda.minesweeper.configuration.database.DataSourceProvider;
 import org.hojeda.minesweeper.configuration.database.migration.FlywayProvider;
 import org.hojeda.minesweeper.configuration.database.transaction.TransactionManager;
 import org.hojeda.minesweeper.configuration.database.transaction.annotation.Transactions;
+import org.hojeda.minesweeper.configuration.mapper.ConfigParser;
 import org.hojeda.minesweeper.configuration.model.DatabaseConfiguration;
 import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.core.entity.constants.board.MovementType;

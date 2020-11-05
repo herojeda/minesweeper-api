@@ -1,7 +1,7 @@
 package org.hojeda.minesweeper.entrypoint.router.handler.base;
 
 import com.google.common.net.HttpHeaders;
-import org.hojeda.minesweeper.util.entrypoint.ContentType;
+import org.hojeda.minesweeper.entrypoint.router.ContentType;
 import spark.Request;
 import spark.Response;
 import spark.Route;

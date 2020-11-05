@@ -1,4 +1,4 @@
-package org.hojeda.minesweeper.configuration;
+package org.hojeda.minesweeper.configuration.mapper;
 
 import org.hojeda.minesweeper.configuration.model.BaseConfiguration;
 import org.slf4j.Logger;

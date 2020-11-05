@@ -4,7 +4,7 @@ import com.google.common.net.HttpHeaders;
 import org.eclipse.jetty.http.HttpStatus;
 import org.hojeda.minesweeper.core.usecase.user.GetUsers;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.user.UserResponse;
-import org.hojeda.minesweeper.util.entrypoint.ContentType;
+import org.hojeda.minesweeper.entrypoint.router.ContentType;
 import spark.Request;
 import spark.Response;
 import spark.Route;

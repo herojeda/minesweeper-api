@@ -1,11 +1,10 @@
 package org.hojeda.minesweeper.entrypoint.router.route.user;
 
-import org.hojeda.minesweeper.core.usecase.user.GetBoardsByUserId;
 import org.hojeda.minesweeper.entrypoint.router.handler.user.GetBoardsByUserIdHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.user.GetUserByIdHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.user.GetUserHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.user.PostUserHandler;
-import org.hojeda.minesweeper.util.mapper.JsonMapper;
+import org.hojeda.minesweeper.configuration.mapper.JsonMapper;
 import spark.RouteGroup;
 import spark.Spark;
 

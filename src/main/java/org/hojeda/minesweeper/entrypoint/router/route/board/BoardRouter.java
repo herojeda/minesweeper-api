@@ -4,8 +4,8 @@ import static org.hojeda.minesweeper.entrypoint.router.route.Routes.*;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.GetBoardHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.PatchBoardHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.PostBoardHandler;
-import org.hojeda.minesweeper.util.entrypoint.ContentType;
-import org.hojeda.minesweeper.util.mapper.JsonMapper;
+import org.hojeda.minesweeper.entrypoint.router.ContentType;
+import org.hojeda.minesweeper.configuration.mapper.JsonMapper;
 import spark.RouteGroup;
 import spark.Spark;
 
