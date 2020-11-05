@@ -7,6 +7,7 @@ import java.util.Set;
 public class BoardResponse {
 
     private Long id;
+    private Long userId;
     private Integer rowSize;
     private Integer columnSize;
     private Integer mines;
@@ -21,6 +22,7 @@ public class BoardResponse {
 
     private BoardResponse(Builder builder) {
         setId(builder.id);
+        setUserId(builder.userId);
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
         setMines(builder.mines);
@@ -38,6 +40,7 @@ public class BoardResponse {
     public static Builder newBuilder(BoardResponse copy) {
         Builder builder = new Builder();
         builder.id = copy.getId();
+        builder.userId = copy.getUserId();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
         builder.mines = copy.getMines();
@@ -49,28 +52,20 @@ public class BoardResponse {
         return builder;
     }
 
-    public LocalDateTime getStartedAt() {
-        return startedAt;
-    }
-
-    public void setStartedAt(LocalDateTime startedAt) {
-        this.startedAt = startedAt;
-    }
-
-    public LocalDateTime getFinishedAt() {
-        return finishedAt;
-    }
-
-    public void setFinishedAt(LocalDateTime finishedAt) {
-        this.finishedAt = finishedAt;
-    }
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Integer getRowSize() {
@@ -113,6 +108,22 @@ public class BoardResponse {
         this.createdAt = createdAt;
     }
 
+    public LocalDateTime getStartedAt() {
+        return startedAt;
+    }
+
+    public void setStartedAt(LocalDateTime startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    public LocalDateTime getFinishedAt() {
+        return finishedAt;
+    }
+
+    public void setFinishedAt(LocalDateTime finishedAt) {
+        this.finishedAt = finishedAt;
+    }
+
     public Set<BoardFieldResponse> getFields() {
         return fields;
     }
@@ -126,12 +137,12 @@ public class BoardResponse {
         if (this == o) return true;
         if (!(o instanceof BoardResponse)) return false;
         BoardResponse that = (BoardResponse) o;
-        return id.equals(that.id) &&
-            rowSize.equals(that.rowSize) &&
-            columnSize.equals(that.columnSize) &&
-            mines.equals(that.mines) &&
-            status == that.status &&
-            createdAt.equals(that.createdAt);
+        return Objects.equals(id, that.id) &&
+            Objects.equals(userId, that.userId) &&
+            Objects.equals(rowSize, that.rowSize) &&
+            Objects.equals(columnSize, that.columnSize) &&
+            Objects.equals(mines, that.mines) &&
+            Objects.equals(status, that.status);
     }
 
     @Override
@@ -139,21 +150,9 @@ public class BoardResponse {
         return Objects.hash(id);
     }
 
-    @Override
-    public String toString() {
-        return "PostBoardResponse{" +
-            "id=" + id +
-            ", rowSize=" + rowSize +
-            ", columnSize=" + columnSize +
-            ", mines=" + mines +
-            ", status=" + status +
-            ", createdAt=" + createdAt +
-            ", fields=" + fields +
-            '}';
-    }
-
     public static final class Builder {
         private Long id;
+        private Long userId;
         private Integer rowSize;
         private Integer columnSize;
         private Integer mines;
@@ -168,6 +167,11 @@ public class BoardResponse {
 
         public Builder withId(Long val) {
             id = val;
+            return this;
+        }
+
+        public Builder withUserId(Long val) {
+            userId = val;
             return this;
         }
 

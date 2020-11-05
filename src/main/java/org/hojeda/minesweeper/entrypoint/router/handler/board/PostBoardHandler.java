@@ -46,12 +46,15 @@ public class PostBoardHandler implements Route {
         response.status(HttpStatus.CREATED_201);
         response.header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.content());
         return BoardResponse.newBuilder()
+            .withUserId(board.getUserId())
             .withMines(board.getMines())
             .withColumnSize(board.getColumnSize())
             .withCreatedAt(board.getCreatedAt())
             .withStatus(board.getStatus().name().toLowerCase())
             .withId(board.getId())
             .withRowSize(board.getRowSize())
+            .withStartedAt(board.getStartedAt())
+            .withFinishedAt(board.getFinishedAt())
             .withFields(board.getFields().stream()
                 .map(boardField -> BoardFieldResponse.newBuilder()
                     .withId(boardField.getId())

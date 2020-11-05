@@ -1,6 +1,6 @@
 package org.hojeda.minesweeper.entrypoint.router.route.board;
 
-import org.hojeda.minesweeper.entrypoint.router.route.Routes;
+import static org.hojeda.minesweeper.entrypoint.router.route.Routes.*;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.GetBoardHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.PatchBoardHandler;
 import org.hojeda.minesweeper.entrypoint.router.handler.board.PostBoardHandler;
@@ -27,15 +27,15 @@ public class BoardRouter implements RouteGroup {
     @Override
     public void addRoutes() {
         Spark.post(
-            Routes.BOARD, ContentType.APPLICATION_JSON.content(), postBoardHandler, JsonMapper.get()::writeValueAsString
+            BOARD, ContentType.APPLICATION_JSON.content(), postBoardHandler, JsonMapper.get()::writeValueAsString
         );
 
         Spark.patch(
-            Routes.BOARD + Routes.BOARD_ID, ContentType.APPLICATION_JSON.content(), patchBoardHandler, JsonMapper.get()::writeValueAsString
+            BOARD + BOARD_ID, ContentType.APPLICATION_JSON.content(), patchBoardHandler, JsonMapper.get()::writeValueAsString
         );
 
         Spark.get(
-            Routes.BOARD + Routes.BOARD_ID, getBoardHandler, JsonMapper.get()::writeValueAsString
+            BOARD + BOARD_ID, getBoardHandler, JsonMapper.get()::writeValueAsString
         );
     }
 }

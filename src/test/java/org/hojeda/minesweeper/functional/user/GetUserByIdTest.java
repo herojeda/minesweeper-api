@@ -1,7 +1,6 @@
 package org.hojeda.minesweeper.functional.user;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import kong.unirest.Unirest;
 import org.apache.http.HttpStatus;
 import org.hojeda.minesweeper.entrypoint.router.dto.response.user.UserResponse;
@@ -10,10 +9,9 @@ import org.hojeda.minesweeper.util.base.FunctionalTest;
 import org.hojeda.minesweeper.util.mapper.JsonMapper;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.is;
 
 public class GetUserByIdTest extends FunctionalTest {
 
@@ -30,7 +28,7 @@ public class GetUserByIdTest extends FunctionalTest {
     }
 
     @Test
-    public void when_call_get_user_with_non_existent_user_id_should_return_404() throws JsonProcessingException {
+    public void when_call_get_user_with_non_existent_user_id_should_return_404() {
         var userId = 9999;
         var givenUri = baseUrl + Routes.USER + Routes.USER_ID.replace(":userId", String.valueOf(userId));
 

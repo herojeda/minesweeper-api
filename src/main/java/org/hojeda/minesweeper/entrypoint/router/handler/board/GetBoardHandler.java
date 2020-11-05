@@ -36,6 +36,7 @@ public class GetBoardHandler implements Route {
         response.status(HttpStatus.OK_200);
         response.header(HttpHeaders.CONTENT_TYPE, ContentType.APPLICATION_JSON.content());
         return BoardResponse.newBuilder()
+            .withUserId(board.getUserId())
             .withMines(board.getMines())
             .withColumnSize(board.getColumnSize())
             .withCreatedAt(board.getCreatedAt())

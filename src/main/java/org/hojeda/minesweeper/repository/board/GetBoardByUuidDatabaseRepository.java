@@ -17,7 +17,7 @@ public class GetBoardByUuidDatabaseRepository {
     }
 
     public Board execute(UUID uuid) {
-        var query = " SELECT b.id, b.uuid, b.created_at, b.status_id, b.row_size, b.column_size, b.mines, b.started_at, b.finished_at " +
+        var query = " SELECT b.id, b.uuid, b.user_id, b.created_at, b.status_id, b.row_size, b.column_size, b.mines, b.started_at, b.finished_at " +
             " FROM BOARD b " +
             " WHERE b.uuid = ? ";
 
@@ -30,6 +30,7 @@ public class GetBoardByUuidDatabaseRepository {
                     return Board.newBuilder()
                         .withId(rs.getLong("id"))
                         .withUuid((UUID) rs.getObject("uuid"))
+                        .withUserId(rs.getLong("user_id"))
                         .withCreatedAt(rs.getTimestamp("created_at").toLocalDateTime())
                         .withStatus(BoardStatus.getById(rs.getLong("status_id")))
                         .withRowSize(rs.getInt("row_size"))

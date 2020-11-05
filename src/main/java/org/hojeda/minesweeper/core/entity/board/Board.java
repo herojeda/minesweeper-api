@@ -12,6 +12,7 @@ public class Board {
 
     private Long id;
     private UUID uuid;
+    private Long userId;
     private Integer rowSize;
     private Integer columnSize;
     private Integer mines;
@@ -24,6 +25,7 @@ public class Board {
     private Board(Builder builder) {
         setId(builder.id);
         setUuid(builder.uuid);
+        userId = builder.userId;
         setRowSize(builder.rowSize);
         setColumnSize(builder.columnSize);
         setMines(builder.mines);
@@ -42,6 +44,7 @@ public class Board {
         Builder builder = new Builder();
         builder.id = copy.getId();
         builder.uuid = copy.getUuid();
+        builder.userId = copy.getUserId();
         builder.rowSize = copy.getRowSize();
         builder.columnSize = copy.getColumnSize();
         builder.mines = copy.getMines();
@@ -58,14 +61,13 @@ public class Board {
         if (this == o) return true;
         if (!(o instanceof Board)) return false;
         Board board = (Board) o;
-        return id.equals(board.id) &&
-            uuid.equals(board.uuid) &&
-            rowSize.equals(board.rowSize) &&
-            columnSize.equals(board.columnSize) &&
-            mines.equals(board.mines) &&
-            status == board.status &&
-            createdAt.equals(board.createdAt) &&
-            Objects.equals(fields, board.fields);
+        return Objects.equals(id, board.id) &&
+            Objects.equals(uuid, board.uuid) &&
+            Objects.equals(userId, board.userId) &&
+            Objects.equals(rowSize, board.rowSize) &&
+            Objects.equals(columnSize, board.columnSize) &&
+            Objects.equals(mines, board.mines) &&
+            status == board.status;
     }
 
     @Override
@@ -78,13 +80,24 @@ public class Board {
         return "Board{" +
             "id=" + id +
             ", uuid=" + uuid +
+            ", userId=" + userId +
             ", rowSize=" + rowSize +
             ", columnSize=" + columnSize +
-            ", miness=" + mines +
+            ", mines=" + mines +
             ", status=" + status +
             ", createdAt=" + createdAt +
+            ", startedAt=" + startedAt +
+            ", finishedAt=" + finishedAt +
             ", fields=" + fields +
             '}';
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public UUID getUuid() {
@@ -170,6 +183,7 @@ public class Board {
     public static final class Builder {
         private Long id;
         private UUID uuid;
+        private Long userId;
         private Integer rowSize;
         private Integer columnSize;
         private Integer mines;
@@ -189,6 +203,11 @@ public class Board {
 
         public Builder withUuid(UUID val) {
             uuid = val;
+            return this;
+        }
+
+        public Builder withUserId(Long val) {
+            userId = val;
             return this;
         }
 

@@ -14,10 +14,7 @@ import org.hojeda.minesweeper.configuration.model.SystemConfiguration;
 import org.hojeda.minesweeper.core.entity.constants.board.MovementType;
 import org.hojeda.minesweeper.core.repository.board.*;
 import org.hojeda.minesweeper.core.repository.board.fields.*;
-import org.hojeda.minesweeper.core.repository.user.GetUserByIdRepository;
-import org.hojeda.minesweeper.core.repository.user.GetUserByNameRepository;
-import org.hojeda.minesweeper.core.repository.user.GetUsersRepository;
-import org.hojeda.minesweeper.core.repository.user.SaveUserRepository;
+import org.hojeda.minesweeper.core.repository.user.*;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyFlagMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyMovement;
 import org.hojeda.minesweeper.core.usecase.board.movement.applier.ApplyOpenMovement;
@@ -64,6 +61,7 @@ public class AppModule extends AbstractModule {
         bind(GetUsersRepository.class).to(GetUsersDatabaseRepository.class);
         bind(GetUserByIdRepository.class).to(GetUserByIdDatabaseRepository.class);
         bind(GetUserByNameRepository.class).to(GetUserByNameDatabaseRepository.class);
+        bind(GetBoardsByUserIdRepository.class).to(GetBoardsByUserIdDatabaseRepository.class);
 
         // Movement strategies
         var movementStrategies = MapBinder.newMapBinder(
