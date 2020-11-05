@@ -5,6 +5,7 @@ plugins {
     id("com.github.johnrengelman.shadow") version "5.0.0"
     idea
     java
+    jacoco
     application
 }
 
@@ -98,6 +99,58 @@ tasks.withType<Test> {
             }
         }
     })
+
+    extensions.configure(JacocoTaskExtension::class) {
+        setDestinationFile(file("$buildDir/jacoco/jacocoTest.exec"))
+        classDumpDir = file("$buildDir/jacoco/classpathdumps")
+    }
+
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+// Code coverage
+jacoco {
+    this.toolVersion = "0.8.5"
+}
+
+val baseFolder: String = "org/hojeda/minesweeper"
+val jacocoExcludedDirs: Array<String> = arrayOf(
+    "$baseFolder/configuration/**",
+    "$baseFolder/core/entity/**",
+    "$baseFolder/entrypoint/router/dto/**"
+)
+
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+        html.destination = file("${buildDir}/jacocoHtml")
+    }
+    dependsOn(tasks.test)
+    classDirectories.setFrom(files(classDirectories.files.map {
+        fileTree(it) {
+            exclude(*jacocoExcludedDirs)
+        }
+    }))
+    finalizedBy(tasks.jacocoTestCoverageVerification)
+}
+
+tasks.jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = "INSTRUCTION"
+                value = "COVEREDRATIO"
+                minimum = BigDecimal("0.96")
+            }
+            classDirectories.setFrom(files(classDirectories.files.map {
+                fileTree(it) {
+                    exclude(*jacocoExcludedDirs)
+                }
+            }))
+        }
+    }
+    dependsOn(tasks.jacocoTestReport)
 }
 
 // Application
