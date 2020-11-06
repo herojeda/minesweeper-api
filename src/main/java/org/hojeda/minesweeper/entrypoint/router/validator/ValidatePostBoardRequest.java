@@ -13,6 +13,8 @@ public class ValidatePostBoardRequest {
 
     public void execute(PostBoardRequest request) {
 
+
+
         if (ROW_MIN_LIMIT > request.getRowSize() || ROW_MAX_LIMIT < request.getRowSize())
             throw new ErrorRequestException(
                 "ROW_SIZE_LIMIT_EXCEEDED - " +
